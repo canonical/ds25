@@ -1,7 +1,7 @@
 {
   "name": "@canonical/vanilla-ts-test",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.1-experimental.4",
   "description": "Vanilla as a monorepo",
   "type": "module",
   "module": "dist/esm/index.js",
@@ -31,7 +31,7 @@
     "check:ts": "tsc --noEmit"
   },
   "devDependencies": {
-    "@canonical/biome-config": "^0.0.1",
-    "@canonical/typescript-config-base": "^0.0.1"
+    "@canonical/biome-config": "^0.0.1-experimental.4",
+    "@canonical/typescript-config-base": "^0.0.1-experimental.4"
   }
 }

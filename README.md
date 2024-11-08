@@ -13,10 +13,10 @@ The monorepo's dependencies should now be installed.
 
 ### Binary bun lockfile
 
-Bun's lockfile (`bun.lockb`) is currently binary. 
+Bun's lockfile (`bun.lockb`) is currently binary.
 This can cause issues with resolving git conflicts when switching branches or pulling changes from remote.
 
-You can mitigate this issue locally by configuring your 
+You can mitigate this issue locally by configuring your
 git client to read Bun lockfiles as text: `git config diff.lockb.textconv bun && git config diff.lockb.binary true`.
 
 This will no longer be necessary once Bun [switches to a text-based lockfile](https://github.com/oven-sh/bun/issues/11863).
@@ -32,7 +32,7 @@ Each of its packages are separate modules that can be worked on independently.
 - `apps/`: Core applications consuming the design system. These could be documentation sites, boilerplates, etc.
 - `configs/`: Recommended configurations for linters, build tools, etc.
 - `packages/`: Modules that consume configurations and are consumed by applications.
-  - [`packages/ds`](/packages/ds/README.md) is especially noteworthy as it publishes our styling and React components, and documents them with [Storybook](https://storybook.js.org/).
+  - [`packages/ds-react-core`](/packages/ds-react-core/README.md) is especially noteworthy as it publishes our styling and React components, and documents them with [Storybook](https://storybook.js.org/).
 
 ## Package scripts
 

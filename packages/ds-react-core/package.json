@@ -1,9 +1,23 @@
 {
-  "name": "@canonical/ds",
-  "version": "0.0.1",
+  "name": "@canonical/ds-react-core",
+  "version": "0.0.1-experimental.4",
   "type": "module",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
+  "files": ["dist"],
+  "author": {
+    "email": "webteam@canonical.com",
+    "name": "Canonical Webteam"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/canonical/vanilla-monorepo"
+  },
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/canonical/vanilla-monorepo/issues"
+  },
+  "homepage": "https://github.com/canonical/vanilla-monorepo#readme",
   "scripts": {
     "build": "bun run build:package",
     "build:storybook": "bun run build-storybook",
@@ -28,8 +42,8 @@
     "react-dom": "^19.0.0-rc-1460d67c-20241003"
   },
   "devDependencies": {
-    "@canonical/biome-config": "^0.0.1",
-    "@canonical/typescript-config-react": "^0.0.1",
+    "@canonical/biome-config": "^0.0.1-experimental.4",
+    "@canonical/typescript-config-react": "^0.0.1-experimental.4",
     "@chromatic-com/storybook": "^1.9.0",
     "@storybook/addon-essentials": "^8.3.4",
     "@storybook/addon-interactions": "^8.3.4",

@@ -1,0 +1,23 @@
+# Assumes the caller has setup the environment and built the packages
+name: Publish packages
+description: Publishes packages.
+inputs:
+  NPM_TOKEN:
+    description: "NPM automation token with publish access for the @canonical npmjs org"
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Set up NPM registry authentication
+      shell: bash
+      run: echo "//registry.npmjs.org/:_authToken=${{ inputs.NPM_TOKEN }}" > .npmrc
+
+    - name: Publish packages
+      shell: bash
+      env:
+        NODE_AUTH_TOKEN: ${{ inputs.NPM_TOKEN }}
+      run: lerna publish --yes --no-private from-package
+
+    - name: Cleanup NPM registry authentication
+      shell: bash
+      run: rm .npmrc

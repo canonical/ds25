@@ -10,8 +10,6 @@ Fixes [list issues/bugs if needed]
 
 ### PR readiness check
 
-If this PR contains Vanilla SCSS code changes, it should contain the following changes to make sure it's ready for the release:
-
 - [ ] PR should have one of the following labels:
   - `Feature 🎁`, `Breaking Change 💣`, `Bug 🐛`, `Documentation 📝`, `Maintenance 🔨`.
 - [ ] All packages define the required scripts in `package.json`: `build`, `check`, and `check:fix`.

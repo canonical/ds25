@@ -1,0 +1,89 @@
+name: Update package versions
+
+on:
+  workflow_dispatch:
+    inputs:
+      update_type:
+        description: "Specify version update type (major, minor, patch, or prerelease)"
+        required: true
+        default: "prerelease"
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - prerelease
+      prerelease_identifier:
+        description: "Custom prerelease identifier (required if update_type is 'prerelease')"
+        default: "experimental"
+        required: false
+        type: string
+      publish_packages:
+        description: "Create a release after updating the package versions"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  version:
+    name: Install, build, test, and version
+    runs-on: ubuntu-latest
+    outputs:
+      VERSION: ${{ steps.lerna_version.outputs.VERSION }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+
+      - name: Setup Git CLI
+        uses: ./.github/actions/setup-git
+        with:
+          name: ${{ github.actor }}
+
+        # TODO add Nx and only build the packages that have changed since last tag
+      - name: Build all packages
+        run: bun run build
+
+        # TODO add Nx and only test the packages that have changed since last tag
+      - name: Run tests
+        run: bun run test
+
+      - name: Determine version bump
+        id: lerna_version
+        run: |
+          # Set the version command based on input
+          if [ "${{ github.event.inputs.update_type }}" = "prerelease" ]; then
+            if [ -z "${{ github.event.inputs.prerelease_identifier }}" ]; then
+              echo "Error: prerelease identifier is required for prerelease bumps."
+              exit 1
+            fi
+            VERSION_ARGS="prerelease --preid ${{ github.event.inputs.prerelease_identifier }}"
+          else
+            VERSION_ARGS="${{ github.event.inputs.update_type }}"
+          fi
+
+          lerna version $VERSION_ARGS --conventional-commits --no-git-tag-version --no-push --yes
+
+          # Get the updated version from lerna.json
+          VERSION=$(jq -r '.version' lerna.json)
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Apply formatting fixes to versioning output
+        run: bun run check:fix
+
+      - name: Commit and tag v${{ steps.lerna_version.outputs.VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git add .
+          git commit -m "chore: version bump to ${{ steps.lerna_version.outputs.VERSION }}"
+          git tag "v${{ steps.lerna_version.outputs.VERSION }}"
+          git push && git push --tags
+
+      - name: Publish packages
+        if: ${{ github.event.inputs.publish_packages }}
+        uses: ./.github/actions/publish
+        with:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

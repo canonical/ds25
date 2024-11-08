@@ -1,6 +1,6 @@
 {
 	"name": "@canonical/typescript-config-react",
-	"version": "0.0.1",
+	"version": "0.0.1-experimental.4",
 	"description": "Vanilla's Typescript configuration",
 	"main": "tsconfig.json",
 	"author": {
@@ -30,6 +30,6 @@
 		"typescript": "^5.6.2"
 	},
 	"dependencies": {
-		"@canonical/typescript-config-base": "0.0.1"
+		"@canonical/typescript-config-base": "^0.0.1-experimental.4"
 	}
 }
