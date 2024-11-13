@@ -1,0 +1,43 @@
+{
+  "name": "@canonical/generator-canonical-ds",
+  "version": "0.0.1",
+  "license": "GPL-3.0-only",
+  "author": {
+    "email": "webteam@canonical.com",
+    "name": "Canonical Webteam"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/canonical/vanilla-monorepo"
+  },
+  "bugs": {
+    "url": "https://github.com/canonical/vanilla-monorepo/issues"
+  },
+  "homepage": "https://github.com/canonical/vanilla-monorepo#readme",
+  "files": ["generators"],
+  "main": "generators/index.js",
+  "scripts": {
+    "build": "bun run build:tsc && bun run build:copyfiles",
+    "build:tsc": "tsc",
+    "build:copyfiles": "copyfiles -u 1 'src/app/templates/**/*' generators",
+    "lint:biome": "biome lint src/*.ts",
+    "format:biome": "biome format src/*.ts",
+    "check": "bun run check:biome && bun run check:ts",
+    "check:fix": "bun run check:biome:fix",
+    "check:biome": "biome check src/**/*.ts *.json",
+    "check:biome:fix": "biome check --write src/**/*.ts *.json",
+    "check:ts": "tsc --noEmit"
+  },
+  "dependencies": {
+    "yeoman-generator": "5.9.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@canonical/biome-config": "0.0.1",
+    "@canonical/typescript-config-react": "0.0.1",
+    "@types/node": "^15.0.0",
+    "@types/yeoman-generator": "5.2.14",
+    "copyfiles": "2.4.1",
+    "typescript": "5.6.3"
+  }
+}
