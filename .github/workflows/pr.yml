@@ -5,6 +5,7 @@ on:
       - main
 jobs:
   build:
+    name: Build & test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -18,3 +19,19 @@ jobs:
 
       - name: Run tests
         run: bun run test
+
+  inclusive-naming-check:
+    name: Inclusive naming check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Check inclusive naming
+        uses: canonical/inclusive-naming@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-check
+          fail-on-error: true
