@@ -4,11 +4,9 @@
  * @param wait - The time in milliseconds to wait between invocations
  * @returns
  */
-// biome-ignore lint/suspicious/noExplicitAny: `any` args and return type are necessary for this fn
-export default function throttle<T extends (...args: any[]) => any>(
-  func: T,
-  wait: number,
-): (...args: Parameters<T>) => void {
+export default function throttle<
+  T extends (...args: Parameters<T>) => ReturnType<T>,
+>(func: T, wait: number): (...args: Parameters<T>) => void {
   let lastCallTime: number | null = null;
   let timeout: ReturnType<typeof setTimeout> | null = null;
 
