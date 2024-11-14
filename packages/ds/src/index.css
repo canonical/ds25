@@ -1,0 +1,14 @@
+@import url("styles/normalize.css");
+@import url("styles/font-faces.css");
+
+html {
+    color: #000;
+    font-family: "Ubuntu variable", "Ubuntu", -apple-system, "Segoe UI", "Roboto", "Oxygen", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 400;
+    line-height: 1.5rem;
+    text-wrap: pretty;
+    font-size: 1rem
+}
+

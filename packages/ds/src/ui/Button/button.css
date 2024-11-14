@@ -1,30 +1,88 @@
-.storybook-button {
+/**
+ notes/todo
+
+ - extracting colours to a shared file
+ - extracting spacing to tokens and shared file
+ - should we have native element button styles (outside of the component)?
+ - bottom margin?
+ - hwo to implement states (across variants)?
+ - how to implement disabled, state?
+ - focus state - was centralised in Vanilla, shared via mixin
+
+- difficulty - migrating from Vanilla to DS
+
+/* base tokens */
+/* TODO: to be extracted to a shared file */
+:root {
+  --ds-color-background-default: #fff;
+  --ds-color-text-default: #000;
+  --ds-color-background-hover: rgba(242, 242, 242, 1);
+  --ds-color-background-active: rgba(235, 235, 235, 1);
+  --ds-color-border-high-contrast: rgba(0, 0, 0, 0.56);
+}
+
+
+/* component tokens */
+.ds-button {
+  --ds-button-background-color: var(--ds-color-background-default);
+  --ds-button-text-color: var(--ds-color-text-default);
+  --ds-button-border-color: var(--ds-color-border-high-contrast);
+
+
+  --ds-button-margin-left: /* sph-large */ 1.5rem;
+  --ds-button-margin-bottom: /* input-margin-bottom */ 0.5rem; /* TODO: do we want any margin? */
+  --ds-button-padding-vertical: /* input-vertical-padding */ 0.5rem; /* needs to take baseline into account */
+  --ds-button-padding-horizontal: /* sph-large */ 1.5rem;
+}
+
+/* component states */
+.ds-button:hover {
+  --ds-button-background-color: var(--ds-color-background-hover);
+  --ds-button-border-color: var(--ds-color-border-high-contrast);
+}
+
+.ds-button:active {
+  --ds-button-background-color: var(--ds-color-background-active);
+  --ds-button-border-color: var(--ds-color-border-high-contrast);
+}
+
+.ds-button {
   display: inline-block;
   cursor: pointer;
-  border: 0;
-  border-radius: 3em;
-  font-weight: 700;
-  line-height: 1;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  color: var(--ds-button-text-color);
+  background-color: var(--ds-button-background-color);
+  border: 1px solid var(--ds-button-border-color);
+
+  border-style: solid;
+  border-width: 1px; /* TODO: extract */
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 400; /* TODO: extract */
+
+  line-height: 1.5rem; /* TODO: extract */
+  margin: 0 var(--ds-button-margin-left) var(--ds-button-margin-bottom) 0;
+  padding: var(--ds-button-padding-vertical) var(--ds-button-padding-horizontal);
+  text-align: left;
+  text-decoration: none;
 }
-.storybook-button--primary {
-  background-color: #1ea7fd;
-  color: white;
+
+.ds-button--positive {
+  --ds-button-background-color: rgba(14, 132, 32, 1);
+  --ds-button-text-color: rgba(255, 255, 255, 1);
+  --ds-button-border-color: rgba(14, 132, 32, 1);
 }
-.storybook-button--secondary {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-  background-color: transparent;
-  color: #333;
+
+.ds-button--positive:hover {
+  --ds-button-background-color: rgba(12, 109, 26, 1);
+  --ds-button-text-color: rgba(255, 255, 255, 1);
+  --ds-button-border-color: rgba(12, 109, 26, 1);
 }
-.storybook-button--small {
-  padding: 10px 16px;
-  font-size: 12px;
+
+.ds-button--positive:active {
+  --ds-button-background-color: rgba(10, 95, 23, 1);
+  --ds-button-text-color: rgba(255, 255, 255, 1);
+  --ds-button-border-color: rgba(10, 95, 23, 1);
 }
-.storybook-button--medium {
-  padding: 11px 20px;
-  font-size: 14px;
-}
-.storybook-button--large {
-  padding: 12px 24px;
-  font-size: 16px;
-}
+

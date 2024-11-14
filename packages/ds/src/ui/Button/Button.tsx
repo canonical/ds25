@@ -3,36 +3,27 @@ import type React from "react";
 import "./button.css";
 
 export interface ButtonProps {
-  /** Is this the principal call to action on the page? */
-  primary?: boolean;
-  /** What background color to use */
-  backgroundColor?: string;
-  /** How large should the button be? */
-  size?: "small" | "medium" | "large";
+  /** The visual style of the button */
+  appearance?: "default" | "base" | "positive" | "negative" | "link";
   /** Button contents */
-  label: string;
+  label?: string;
   /** Optional click handler */
   onClick?: () => void;
 }
 
 /** Primary UI component for user interaction */
 const Button = ({
-  primary = false,
-  size = "medium",
-  backgroundColor,
+  appearance = "default",
   label,
   ...props
 }: ButtonProps): React.ReactElement => {
-  const mode = primary
-    ? "storybook-button--primary"
-    : "storybook-button--secondary";
+
   return (
     <button
       type="button"
-      className={["storybook-button", `storybook-button--${size}`, mode].join(
+      className={["ds-button", appearance !== "default" ? `ds-button--${appearance}` : ""].join(
         " ",
       )}
-      style={{ backgroundColor }}
       {...props}
     >
       {label}
