@@ -1,11 +1,11 @@
 {
-  "name": "@canonical/ds25-ts-test",
-  "private": true,
-  "version": "0.0.0-experimental.1",
-  "description": "TypeScript test project",
+  "name": "@canonical/util-throttle",
+  "description": "Canonical's standard throttle utility",
+  "version": "0.0.0-experimental.2",
   "type": "module",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
+  "files": ["dist"],
   "author": {
     "email": "webteam@canonical.com",
     "name": "Canonical Webteam"
@@ -21,20 +21,19 @@
   "homepage": "https://github.com/canonical/ds25#readme",
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint:biome": "biome lint src/*.ts",
-    "format:biome": "biome format src/*.ts",
+    "lint": "biome lint src/*.{ts,tsx}",
+    "format": "bun run format:biome",
+    "format:biome": "biome format src/*.{ts,tsx}",
     "check": "bun run check:biome && bun run check:ts",
     "check:fix": "bun run check:biome:fix",
-    "check:biome": "biome check src/*.ts *.json",
-    "check:biome:fix": "biome check --write src/*.ts *.json",
+    "check:biome": "biome check src/* *.json",
+    "check:biome:fix": "biome check --write src/* *.json",
     "check:ts": "tsc --noEmit"
   },
-  "dependencies": {
-    "@canonical/util-throttle": "^0.0.0-experimental.0"
-  },
   "devDependencies": {
-    "@canonical/biome-config": "^0.1.1-experimental.0",
-    "@canonical/typescript-config-base": "^0.1.1-experimental.0"
+    "@biomejs/biome": "^1.9.2",
+    "@canonical/biome-config": "^0.1.0-experimental.0",
+    "@canonical/typescript-config-base": "^0.1.0-experimental.0",
+    "typescript": "^5.5.3"
   }
 }
