@@ -1,32 +1,25 @@
-// biome-ignore lint/suspicious/noExplicitAny: `any` args and return type are necessary for this fn
-function debounce<T extends (...args: any[]) => Promise<any>>(
-  fn: T,
-  delay: number,
-) {
-  let timeoutId: ReturnType<typeof setTimeout> | null = null;
-  // biome-ignore lint/suspicious/noExplicitAny: `any` args and return type are necessary for this fn
-  let promiseReject: ((reason?: any) => void) | null = null;
+import debounce from "@canonical/util-debounce";
 
-  return (...args: Parameters<T>): Promise<ReturnType<T>> => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-      if (promiseReject) {
-        promiseReject("Debounced function call cancelled");
-      }
-    }
+const fetchData = (query: string) => console.log(`Fetching data for: ${query}`);
 
-    return new Promise((resolve, reject) => {
-      promiseReject = reject;
-      timeoutId = setTimeout(async () => {
-        try {
-          const result = await fn(...args);
-          resolve(result);
-        } catch (error) {
-          reject(error);
-        }
-      }, delay);
-    });
-  };
-}
+const debouncedFetchData = debounce(fetchData, 500);
 
-export default debounce;
+// Only the last call will be executed
+debouncedFetchData("query 1").then(console.log);
+debouncedFetchData("query 2").then(console.log);
+debouncedFetchData("query 3").then(console.log);
+
+// Async version
+const asyncFetchData = async (query: number) => {
+  console.log(`Asynchronously Fetching data for: ${query}`);
+  return query;
+};
+
+const debouncedAsyncFetchData = debounce(asyncFetchData, 500);
+
+// Only the last call will be executed
+debouncedAsyncFetchData(1).then(console.log);
+debouncedAsyncFetchData(2).then(console.log);
+debouncedAsyncFetchData(3)
+  .then((n) => n)
+  .then((n) => console.log(n + 1));
