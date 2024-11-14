@@ -31,9 +31,11 @@
     "check:ts": "tsc --noEmit"
   },
   "dependencies": {
+    "@canonical/util-debounce": "^0.0.0-experimental.0",
     "@canonical/util-throttle": "^0.0.0-experimental.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.2",
     "@canonical/biome-config": "^0.1.1-experimental.0",
     "@canonical/typescript-config-base": "^0.1.1-experimental.0"
   }
