@@ -21,6 +21,26 @@
   --ds-color-border-high-contrast: rgba(0, 0, 0, 0.56);
 }
 
+/* FF enable flag `layout.css.at-scope.enabled`*/
+@scope (.button) {
+/*.ds.button {*/
+  /* color: black; */
+  :scope {
+    color: black;
+  }
+  &:hover {
+
+  }
+  &:active {
+
+  }
+  &:focus {
+
+  }
+  &.positive {
+    
+  }
+}
 
 /* component tokens */
 .ds-button {
