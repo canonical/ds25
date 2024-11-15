@@ -40,12 +40,9 @@ jobs:
         with:
           fetch-depth: 1
 
+        # "prepare" hook on `bun install` runs `bun run build`
       - name: Setup environment
         uses: ./.github/actions/setup-env
-
-        # TODO add Nx and only build the packages that have changed since last tag
-      - name: Build all packages
-        run: bun run build
 
         # TODO add Nx and only test the packages that have changed since last tag
       - name: Run tests
@@ -96,6 +93,7 @@ jobs:
           fetch-depth: 1
           ref: v${{ needs.version.outputs.VERSION }}
 
+        # "prepare" hook on `bun install` runs `bun run build`
       - name: Setup Environment
         uses: ./.github/actions/setup-env
 
@@ -106,9 +104,6 @@ jobs:
           registry-url: https://registry.npmjs.org
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-
-      - name: Build
-        run: bun run build
 
       - name: Publish packages
         run: lerna publish --yes --no-private from-package

@@ -10,11 +10,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+        # "prepare" hook on `bun install` runs `bun run build`
       - name: Setup environment
         uses: ./.github/actions/setup-env
-
-      - name: Build all packages
-        run: bun run build
 
       - name: Run tests
         run: bun run test
