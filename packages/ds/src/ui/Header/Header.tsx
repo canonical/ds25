@@ -59,10 +59,7 @@ const Header = ({
         ) : (
           <>
             <Button onClick={onLogin} label="Log in" />
-            <Button
-              onClick={onCreateAccount}
-              label="Sign up"
-            />
+            <Button onClick={onCreateAccount} label="Sign up" />
           </>
         )}
       </div>

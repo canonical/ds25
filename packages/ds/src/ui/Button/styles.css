@@ -1,0 +1,83 @@
+/**
+ notes/todo
+ - should we have native element button styles (outside of the component)?
+ - bottom margin?
+ - how to implement states (across variants)?
+ - how to implement disabled, state?
+ - focus state - was centralised in Vanilla, shared via mixin
+
+- difficulty - migrating from Vanilla to DS
+
+- color-mix: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix
+- color: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color
+*/
+
+/* component variables
+    --ds-button-background-color: background color of the button
+    --ds-button-text-color: text color of the button
+    --ds-button-border-color: border color of the button
+
+    --ds-button-margin-left: left margin of the button
+    --ds-button-margin-bottom: bottom margin of the button
+    --ds-button-padding-vertical: vertical padding of the button
+    --ds-button-padding-horizontal: horizontal padding of the button
+*/
+.ds-button {
+  --ds-button-background-color: var(--ds-color-background-default);
+  --ds-button-text-color: var(--ds-color-text-default);
+  --ds-button-border-color: var(--ds-color-border-high-contrast);
+
+  --ds-button-margin-left: var(--ds-spacing-horizontal-large);
+  /* TODO: why is button using "input" spacing? what should it consume from foundation? generic "token" values (small padding, etc) or component specific values (button padding) */
+  --ds-button-margin-bottom: var(--ds-spacing-input-margin-bottom); /* TODO: do we want any margin? */
+  --ds-button-padding-vertical: var(--ds-spacing-input-padding-vertical);
+  --ds-button-padding-horizontal: var(--ds-spacing-horizontal-large);
+
+  /* component states */
+  &:hover {
+    --ds-button-background-color: var(--ds-color-background-hover);
+    --ds-button-border-color: var(--ds-color-border-high-contrast);
+  }
+
+  &:active {
+    --ds-button-background-color: var(--ds-color-background-active);
+    --ds-button-border-color: var(--ds-color-border-high-contrast);
+  }
+}
+
+/* TODO: remove hardcoded colors */
+.ds-button--positive {
+  --ds-button-background-color: rgba(14, 132, 32, 1);
+  --ds-button-text-color: rgba(255, 255, 255, 1);
+  --ds-button-border-color: rgba(14, 132, 32, 1);
+
+  &:hover {
+    --ds-button-background-color: rgba(12, 109, 26, 1);
+    --ds-button-border-color: rgba(12, 109, 26, 1);
+  }
+
+  &:active {
+    --ds-button-background-color: rgba(10, 95, 23, 1);
+    --ds-button-border-color: rgba(10, 95, 23, 1);
+  }
+}
+
+/* component styles */
+.ds-button {
+  display: inline-block;
+  cursor: pointer;
+
+  color: var(--ds-button-text-color);
+  background-color: var(--ds-button-background-color);
+  border-color: var(--ds-button-border-color);
+  border-style: solid;
+  border-width: 1px; /* TODO: extract */
+  font-size: 1rem;
+  font-weight: 400; /* TODO: extract */
+
+  line-height: 1.5rem; /* TODO: extract */
+  margin: 0 var(--ds-button-margin-left) var(--ds-button-margin-bottom) 0;
+  padding: var(--ds-button-padding-vertical) var(--ds-button-padding-horizontal);
+  text-align: left;
+  text-decoration: none;
+}

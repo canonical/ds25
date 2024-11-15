@@ -1,0 +1,62 @@
+/**
+ notes/todo
+ - should we have native element button styles (outside of the component)?
+ - bottom margin?
+ - how to implement states (across variants)?
+ - how to implement disabled, state?
+ - focus state - was centralised in Vanilla, shared via mixin
+
+- difficulty - migrating from Vanilla to DS
+
+- color-mix: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix
+- color: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color
+*/
+
+/* component styles */
+.ds-button {
+  display: inline-block;
+  cursor: pointer;
+
+  color: var(--ds-color-text-default);
+  background-color: var(--ds-color-background-default);
+  border-color: var(--ds-color-border-high-contrast);
+  border-style: solid;
+  border-width: 1px; /* TODO: extract */
+  font-size: 1rem;
+  font-weight: 400; /* TODO: extract */
+
+  line-height: 1.5rem; /* TODO: extract */
+  margin: 0 var(--ds-spacing-horizontal-large)
+    var(--ds-spacing-input-margin-bottom) 0;
+  padding: var(--ds-spacing-input-padding-vertical)
+    var(--ds-spacing-horizontal-large);
+  text-align: left;
+  text-decoration: none;
+
+  /* component states */
+  &:hover {
+    background-color: var(--ds-color-background-hover);
+    border-color: var(--ds-color-border-high-contrast);
+  }
+
+  &:active {
+    background-color: var(--ds-color-background-active);
+    border-color: var(--ds-color-border-high-contrast);
+  }
+
+  &.ds-button--positive {
+    background-color: rgba(14, 132, 32, 1);
+    color: rgba(255, 255, 255, 1);
+    border-color: rgba(14, 132, 32, 1);
+
+    &:hover {
+      background-color: rgba(12, 109, 26, 1);
+      border-color: rgba(12, 109, 26, 1);
+    }
+
+    &:active {
+      background-color: rgba(10, 95, 23, 1);
+      border-color: rgba(10, 95, 23, 1);
+    }
+  }
+}

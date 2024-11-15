@@ -1,0 +1,18 @@
+/* base tokens */
+:root {
+  /* color tokens */
+  --ds-color-background-default: #fff;
+  --ds-color-text-default: #000;
+  --ds-color-background-hover: rgba(242, 242, 242, 1);
+  --ds-color-background-active: rgba(235, 235, 235, 1);
+  --ds-color-border-high-contrast: rgba(0, 0, 0, 0.56);
+
+  /* spacing tokens */
+  --ds-spacing-horizontal-small: 0.5rem;
+  --ds-spacing-horizontal-large: 1.5rem;
+
+  --ds-spacing-vertical-small: 0.5rem;
+
+  --ds-spacing-input-margin-bottom: 0.5rem; /* TODO: needs baseline alignment https://github.com/canonical/vanilla-framework/blob/main/scss/_settings_spacing.scss#L122 */
+  --ds-spacing-input-padding-vertical: 0.5rem; /* TODO: needs to take baseline into account https://github.com/canonical/vanilla-framework/blob/main/scss/_settings_spacing.scss#L124 */
+}

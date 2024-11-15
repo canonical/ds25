@@ -1,61 +1,51 @@
 import type React from "react";
 
-import "./button.css";
-
-//const baseClassName = 'ds'
-
-export enum ButtonTypeEnum {
-  Button = "button",
-  Submit = "submit"
-}
+import "./styles.css";
 
 export interface ButtonProps {
-  id:string,
-  style:any,
-  className:string,
+  /* A unique identifier for the button */
+  id?: string;
+  /** Additional CSS classes */
+  className?: string;
   /** The visual style of the button */
   appearance?: "default" | "base" | "positive" | "negative" | "link";
   /** Button contents */
-  label?: string;
+  label: string;
   /** Optional click handler */
   onClick?: () => void;
-
-  type:ButtonTypeEnum;
 }
 
-
 /*
- variant / modifier / appearance
- when there is a list of children : items (?) <Navigation items=> 
- <Accordion items=>
- flags : adjective/participate (disabled) or fully boolean isDisabled
-
+  TODO: decide on coding conventions for props
+    - listing values in types:
+      - unions vs TS enums vs object with ValuesOf
+    - "variants": variant / modifier / appearance
+    - using children vs prop:
+        - when there is a list of children:
+          items (?) <Navigation items=> <Accordion items=>
+    - flags : adjective/participate (disabled) or fully boolean isDisabled
  */
 
-/** Primary UI component for user interaction */
+/** Buttons are clickable elements used to perform an action. */
 const Button = ({
   id,
   className,
-  style,
   appearance = "default",
   label,
-  type:buttonType = ButtonTypeEnum.Button,
-  // ref,
-  ...props
+  ...props // TODO: allow other props - currently we spead all props, but they are not allowed by the type
 }: ButtonProps): React.ReactElement => {
-
   return (
     <button
       id={id}
-      style={style}
       className={[
         className,
-        "ds-button", 
-        appearance !== "default" && `ds-button--${appearance}`
-      ].filter(Boolean).join(" ")
-      }
-      type={ buttonType }
+        "ds-button",
+        appearance !== "default" && `ds-button--${appearance}`,
+      ]
+        .filter(Boolean)
+        .join(" ")}
       {...props}
+      aria-label={label}
     >
       {label}
     </button>
