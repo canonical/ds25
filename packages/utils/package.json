@@ -1,7 +1,7 @@
 {
-  "name": "@canonical/util-throttle",
-  "description": "Canonical's standard throttle utility",
-  "version": "0.0.0-experimental.2",
+  "name": "@canonical/utils",
+  "description": "Standard utility functions for Canonical's Web Engineering team",
+  "version": "0.0.0-experimental.0",
   "type": "module",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",

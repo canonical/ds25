@@ -15,7 +15,7 @@ window.addEventListener(
   'resize',
   throttle(() => {
     console.log("window was resized!");
-  }, 10);
+  }, 500)
 );
 
 ```

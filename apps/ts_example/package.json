@@ -1,7 +1,7 @@
 {
   "name": "@canonical/ds25-ts-test",
   "private": true,
-  "version": "0.0.0-experimental.1",
+  "version": "0.1.1-experimental.0",
   "description": "TypeScript test project",
   "type": "module",
   "module": "dist/esm/index.js",
@@ -31,8 +31,7 @@
     "check:ts": "tsc --noEmit"
   },
   "dependencies": {
-    "@canonical/util-debounce": "^0.0.0-experimental.0",
-    "@canonical/util-throttle": "^0.0.0-experimental.0"
+    "@canonical/utils": "^0.0.0-experimental.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.2",

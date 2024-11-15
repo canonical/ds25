@@ -1,4 +1,4 @@
-import debounce from "@canonical/util-debounce";
+import { debounce } from "@canonical/utils";
 
 const fetchData = (query: string) => console.log(`Fetching data for: ${query}`);
 
