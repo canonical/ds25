@@ -16,11 +16,12 @@ calls when events like user input or window resizing occur in quick succession.
 ```ts
 import debounce from "@canonical/util-debounce";
 
-const fetchData = (query: string) => console.log(`Fetching data for: ${query}`);
+const debouncedFetchData = debounce(async (query: string) => {
+  const response = await fetch(`/api/search?q=${query}`);
+  return response.json();
+}, 300);
 
-const debouncedFetchData = debounce(fetchData, 500);
-
-debouncedFetchData("query 1"); // Only the last call will be executed
-debouncedFetchData("query 2");
-debouncedFetchData("query 3");
+// Calling the debounced function multiple times
+debouncedFetchData("hello").then(console.log); // Will only call fetch once after 300ms delay
+debouncedFetchData("world").then(console.log); // Will cancel the previous call and make a new one
 ```
