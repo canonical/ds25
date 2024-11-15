@@ -22,7 +22,8 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "lerna run build --parallel",
+    "build": "lerna run build",
+    "prepare": "bun run build",
     "lerna": "lerna",
     "test": "bun run check",
     "check": "lerna run check --parallel",

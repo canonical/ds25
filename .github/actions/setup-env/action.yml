@@ -12,6 +12,7 @@ runs:
       with: 
         bun-version: ${{ inputs.bun-version }}
 
+      # "prepare" hook on `bun install` runs `bun run build`
     - name: Install dependencies
       shell: bash
       run: bun install --frozen-lockfile
