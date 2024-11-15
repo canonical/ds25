@@ -2,6 +2,7 @@
   "extends": "@canonical/typescript-config-base",
   "compilerOptions": {
     "baseUrl": "src",
+    "lib": ["ES2023", "DOM"],
     "outDir": "dist/esm",
     "declaration": true,
     "declarationDir": "dist/types"

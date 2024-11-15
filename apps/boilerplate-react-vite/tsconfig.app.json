@@ -1,0 +1,8 @@
+{
+  "extends": "@canonical/typescript-config-react",
+  "compilerOptions": {
+    "composite": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
