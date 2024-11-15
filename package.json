@@ -22,11 +22,11 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "lerna run build --parallel",
+    "build": "lerna run build",
     "lerna": "lerna",
     "test": "bun run check",
-    "check": "lerna run check --parallel",
-    "check:fix": "lerna run check:fix --parallel"
+    "check": "lerna run check",
+    "check:fix": "lerna run check:fix"
   },
   "devDependencies": {
     "lerna": "^8.1.8"
