@@ -4,8 +4,17 @@
  * @param func - The function to throttle
  * @param wait - The time in milliseconds to wait between invocations
  * @returns A throttled version of the function
- * @see throttling function calls, by Remy Sharp
+ * @see Throttling function calls, by Remy Sharp
  *  http://remysharp.com/2010/07/21/throttling-function-calls/
+ *
+ * @example
+ *
+ * window.addEventListener(
+ *   'resize',
+ *   throttle(() => {
+ *     console.log("window was resized!");
+ *   }, 500)
+ * );
  */
 export default function throttle<
   T extends (...args: Parameters<T>) => ReturnType<T>,
