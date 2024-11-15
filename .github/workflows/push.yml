@@ -1,0 +1,25 @@
+name: Main branch update
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup environment
+        uses: ./.github/actions/setup-env
+
+      - name: Build all packages
+        run: bun run build
+
+      - name: Run tests
+        run: bun run test
