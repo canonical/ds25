@@ -10,6 +10,9 @@
     "email": "webteam@canonical.com",
     "name": "Canonical Webteam"
   },
+  "bin": {
+    "serve-express": "./dist/esm/server/serve-express.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/canonical/ds25"

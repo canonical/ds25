@@ -94,7 +94,7 @@ The example below uses Vite.
 ### Server Request Handling
 
 Once your app is built, you can set up an Express server to handle SSR requests.
-See [this file](../../../apps/boilerplate-react-vite/src/ssr/server.ts) as an example.
+See [this file](../../../apps/react/boilerplate-vite/src/ssr/server.ts) as an example.
 
 ### Injecting the Client Application
 
