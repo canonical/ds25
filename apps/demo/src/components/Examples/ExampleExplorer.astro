@@ -1,0 +1,47 @@
+---
+import type { ExampleData } from "./ExampleControls";
+import ExamplePreview from "./ExamplePreview.astro";
+
+const examples: ExampleData[] = [
+  {
+    id: "button-example",
+    name: "Button Example",
+    description: "A button example",
+    component: "Button", // Assuming you have a Button component
+    configurations: {
+      fontFamily: {
+        choices: ["Arial", "Helvetica", "Times New Roman", "Ubuntu"],
+        default: "Arial",
+        value: "Arial",
+      },
+      fontSize: {
+        min: 12,
+        max: 24,
+        default: 16,
+        value: 16,
+      },
+    },
+  },
+];
+---
+
+<div class="example-explorer">
+    <h1>Example Explorer</h1>
+    <div class="example-list">
+      {examples.map((example) => (
+              <ExamplePreview example={example}/>
+      ))}
+    </div>
+</div>
+
+<style>
+    .example-explorer {
+        padding: 20px;
+    }
+
+    .example-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+</style>

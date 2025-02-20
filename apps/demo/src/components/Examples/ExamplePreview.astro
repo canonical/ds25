@@ -1,0 +1,23 @@
+---
+import { ExampleControls } from "./ExampleControls/index.js";
+const { example } = Astro.props;
+---
+
+<div class="example-preview">
+    <h2>{example.name}</h2>
+    <p>{example.description}</p>
+    <ExampleControls client:load example={example}/>
+</div>
+
+<style>
+    .example-preview {
+        border: 1px solid #ccc;
+        padding: 15px;
+    }
+
+    .example-display {
+        margin-bottom: 10px;
+        border: 1px solid lightblue;
+        padding: 10px;
+    }
+</style>
