@@ -1,0 +1,8 @@
+{
+  "extends": "@canonical/typescript-config-react",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
+  "compilerOptions": {
+    "types": ["node", "react", "react-dom", "astro"]
+  }
+}
