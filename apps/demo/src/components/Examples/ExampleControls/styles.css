@@ -1,0 +1,10 @@
+.ds.example-controls__inputs {
+  margin-bottom: 1em;
+}
+
+.ds.example-controls__frame {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1em;
+  padding: 0.5em;
+}
