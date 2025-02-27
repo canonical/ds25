@@ -25,11 +25,7 @@
     "check:fix": "bun run check:biome:fix && bun run check:ts",
     "check:biome": "biome check",
     "check:biome:fix": "biome check --write",
-    "check:ts": "astro check",
-    "test": "bun run test:vitest",
-    "test:watch": "bun run test:vitest:watch",
-    "test:vitest": "vitest run",
-    "test:vitest:watch": "vitest"
+    "check:ts": "astro check"
   },
   "dependencies": {
     "@astrojs/react": "^4.2.0",
@@ -44,13 +40,9 @@
     "@biomejs/biome": "^1.9.4",
     "@canonical/biome-config": "^0.9.0-experimental.2",
     "@canonical/typescript-config-react": "^0.9.0-experimental.2",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.1.0",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "jsdom": "^26.0.0",
     "typescript": "^5.7.3",
-    "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^2.1.8"
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

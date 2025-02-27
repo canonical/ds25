@@ -7,7 +7,8 @@ const examples: ExampleData[] = [
     id: "button-example",
     name: "Button Example",
     description: "A button example",
-    component: "Button", // Assuming you have a Button component
+    type: "react",
+    component: "Button",
     configurations: {
       fontFamily: {
         choices: ["Arial", "Helvetica", "Times New Roman", "Ubuntu"],
@@ -33,15 +34,3 @@ const examples: ExampleData[] = [
       ))}
     </div>
 </div>
-
-<style>
-    .example-explorer {
-        padding: 20px;
-    }
-
-    .example-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-    }
-</style>

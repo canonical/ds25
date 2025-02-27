@@ -1,9 +1,21 @@
 /* @canonical/generator-ds 0.9.0-experimental.4 */
+import type { ComponentKey } from "../Renderer/index.js";
+
+export interface ExampleStylesCSS {
+  "--font-family"?: string;
+  "--font-size"?: string;
+}
+
+export interface ExampleControlStateChangeEventContext {
+  styles: ExampleStylesCSS;
+}
+
 export interface ExampleData {
   id: string;
   name: string;
   description: string;
-  component: string;
+  type: "react" | "web-component";
+  component: ComponentKey;
   configurations: ExampleConfigurations;
 }
 

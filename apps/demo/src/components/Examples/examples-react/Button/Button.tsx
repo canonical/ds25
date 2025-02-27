@@ -11,9 +11,7 @@ const Button = ({
     <div
       id={id}
       style={styles}
-      className={["ds", "example", "button", className]
-        .filter(Boolean)
-        .join(" ")}
+      className={["ds", "example", className].filter(Boolean).join(" ")}
     >
       <button onClick={() => alert("I'm a button!")} type={"button"}>
         Click me
