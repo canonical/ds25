@@ -1,0 +1,31 @@
+---
+import { type ExampleConfigItem, ExampleControls } from "./ExampleControls";
+import ExampleRenderer from "./ExampleRenderer.astro";
+const examples: ExampleConfigItem[] = [
+  {
+    name: "Button Example",
+    description: "A button example",
+    type: "react",
+    exampleIdentifier: "button",
+    configurations: {
+      fontFamily: {
+        choices: ["Arial", "Helvetica", "Times New Roman", "Ubuntu"],
+        default: "Arial",
+        value: "Arial",
+      },
+      fontSize: {
+        min: 12,
+        max: 24,
+        default: 16,
+        value: 16,
+      },
+    },
+  },
+];
+---
+
+<div class="example-explorer">
+    <h1>Example Explorer</h1>
+    <ExampleRenderer/>
+    <ExampleControls client:load examples={examples}/>
+</div>

@@ -1,0 +1,21 @@
+---
+---
+
+<div class="ds example" id="root">
+
+</div>
+
+<script>
+  import {eventBus} from "./ExampleControls/eventBus";
+  import {ChangeEvent} from "react";
+  import {EXAMPLE_MAP} from "./examples";
+  import {renderToString} from "react-dom/server";
+
+  eventBus.subscribe("example-config-changed", (event: ChangeEvent) => {
+    const root = document.getElementById("root");
+    console.log(event);
+    const identifier = event.exampleIdentifier;
+    const example = EXAMPLE_MAP[identifier];
+    if (example) root.innerHTML = renderToString(example(event.configurations))
+  })
+</script>

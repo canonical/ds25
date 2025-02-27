@@ -1,0 +1,125 @@
+.specimen-container {
+  padding: 20px;
+  font-family: var(--font-family, sans-serif); /* Default to sans-serif if not set */
+  font-size: var(--font-size, 16px); /* Default to 16px if not set */
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.top-bar button,
+.top-bar a {
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-size: inherit; /* Inherit font size from the container */
+}
+
+.heading-section h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  line-height: var(--text-line-height, 1.6); /* Default to 1.6 if not set */
+}
+
+.heading-section h2 {
+  font-size: 2em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  line-height: var(--text-line-height, 1.6);
+}
+
+.heading-section h3 {
+  font-size: 1.75em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  line-height: var(--text-line-height, 1.6);
+}
+
+.heading-section h4 {
+  font-size: 1.5em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  line-height: var(--text-line-height, 1.6);
+}
+
+.heading-section h5 {
+  font-size: 1.25em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  line-height: var(--text-line-height, 1.6);
+}
+
+.heading-section h6 {
+  font-size: 1em;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  line-height: var(--text-line-height, 1.6);
+}
+
+.heading-section p {
+  line-height: var(--text-line-height, 1.6);
+  margin-bottom: var(--space-after-lines, 15px); /* Default to 15px if not set */
+}
+
+.grid-section {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.grid-item {
+  padding: 15px;
+  border: 1px solid transparent; /* Initially transparent */
+}
+
+/* Simulate the red grid highlights */
+.grid-container > * {
+  outline: 1px solid rgba(255, 0, 0, 0.3); /* Red outline for grid visualization */
+}
+
+.grid-container p {
+  line-height: var(--text-line-height, 1.6);
+  margin-bottom: var(--space-after-lines, 15px);
+  font-size: inherit; /* Inherit font size from the container */
+}
+
+.text-examples-section {
+  margin-top: 30px;
+}
+
+.text-example-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.text-example-item {
+  border: 1px solid #eee;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.the-quick-brown-fox {
+  font-weight: bold;
+  margin-bottom: 5px;
+  line-height: var(--text-line-height, 1.6);
+  font-size: inherit; /* Inherit font size */
+}
+
+.lorem-ipsum-small {
+  font-size: 0.9em; /* Keep this relative size */
+  line-height: var(--text-line-height, 1.4); /* Slightly adjusted default for smaller text */
+  margin-bottom: var(--space-after-lines, 15px);
+}
