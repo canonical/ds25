@@ -1,14 +1,11 @@
-import { debounce } from "@canonical/utils";
 import {
   type CSSProperties,
   useCallback,
   useEffect,
   useMemo,
   useRef,
-  useState,
 } from "react";
 import {
-  type UseResizeObserverResult,
   useResizeObserver,
 } from "../useResizeObserver/index.js";
 import { useWindowDimensions } from "../useWindowDimensions/index.js";
