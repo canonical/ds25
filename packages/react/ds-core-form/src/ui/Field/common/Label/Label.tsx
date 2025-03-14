@@ -5,6 +5,11 @@ import "./styles.css";
 
 const componentCssClassName = "ds label";
 
+/** Placeholder for internationalized messages */
+const defaultMessages = {
+  optional: () => "optional",
+};
+
 /**
  * description of the Label component
  * @returns {React.ReactElement} - Rendered Label
@@ -14,15 +19,22 @@ const Label = ({
   children,
   className,
   style,
+  name,
+  isOptional,
+  messages = defaultMessages,
+  namePrefix = "form-",
+  tag: Element = "label",
 }: LabelProps): React.ReactElement => {
   return (
-    <div
+    <Element
       id={id}
       style={style}
+      htmlFor={Element === "label" ? `${namePrefix}${name}` : undefined}
       className={[componentCssClassName, className].filter(Boolean).join(" ")}
     >
-      {children}
-    </div>
+      {children || name}
+      {isOptional && <span> ({messages.optional})</span>}
+    </Element>
   );
 };
 

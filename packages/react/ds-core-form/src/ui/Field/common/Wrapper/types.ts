@@ -1,7 +1,8 @@
 /* @canonical/generator-ds 0.9.0-experimental.4 */
 import type React from "react";
+import type { FieldProps } from "../../types.js";
 
-export interface WrapperProps {
+export type WrapperProps = FieldProps & {
   /* A unique identifier for the Wrapper */
   id?: string;
   /* Additional CSS classes */
@@ -10,4 +11,16 @@ export interface WrapperProps {
   children?: React.ReactNode;
   /* Inline styles */
   style?: React.CSSProperties;
-}
+
+  /* The name of input labelled */
+  label?: string;
+
+  /* Is the field optional */
+  isOptional?: boolean;
+
+  /* TODO */
+  nestedRegisterProps?: Record<string, unknown>;
+
+  /* Whether to unregister the field on unmount */
+  unregisterOnUnmount?: boolean;
+};

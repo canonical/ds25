@@ -4,5 +4,5 @@ export type BaseInputProps = {
   className?: string;
   style?: React.CSSProperties;
   name: string;
-  registerProps?: Record<string, unknown>;
+  registerProps?: Record<string, unknown>; //TODO improve
 };
