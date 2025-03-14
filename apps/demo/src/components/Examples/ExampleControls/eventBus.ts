@@ -1,11 +1,11 @@
 class EventBus extends EventTarget {
   emit(event, detail, evtRoot?: HTMLElement) {
     const customEvent = new CustomEvent(event, { detail });
-    console.log({event, detail, evtRoot});
+    console.log({ event, detail, evtRoot });
     // if (evtRoot) {
-      evtRoot?.dispatchEvent(customEvent);
+    evtRoot?.dispatchEvent(customEvent);
     // } else {
-      this.dispatchEvent(customEvent);
+    this.dispatchEvent(customEvent);
     // }
   }
 

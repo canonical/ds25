@@ -1,5 +1,4 @@
 * {
-    font-size: var(--font-size);
-    font-family: var(--font-family);
-    border: 1px solid red;
+  font-size: var(--font-size);
+  font-family: var(--font-family);
 }
