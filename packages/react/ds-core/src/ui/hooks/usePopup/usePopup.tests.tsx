@@ -75,19 +75,19 @@ describe("usePopup", () => {
     const { result } = renderHook(() => usePopup({}));
 
     act(() => {
-      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test focus event without the test data conforming to FocusEvent type
+      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test event without the test data conforming to FocusEvent type
       result.current.handleTriggerFocus({ nativeEvent: {} } as any);
     });
 
-    expect(activate).toHaveBeenCalledTimes(1);
+    expect(activate).toHaveBeenCalledOnce();
     expect(result.current.isFocused).toBe(true);
 
     act(() => {
-      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test focus event without the test data conforming to FocusEvent type
+      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test event without the test data conforming to FocusEvent type
       result.current.handleTriggerBlur({ nativeEvent: {} } as any);
     });
 
-    expect(deactivate).toHaveBeenCalledTimes(1);
+    expect(deactivate).toHaveBeenCalledOnce();
     expect(result.current.isFocused).toBe(false);
   });
 
@@ -103,18 +103,18 @@ describe("usePopup", () => {
     const { result } = renderHook(() => usePopup({}));
 
     act(() => {
-      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test focus event without the test data conforming to FocusEvent type
-      result.current.handleTriggerEnter({ nativeEvent: {} } as any);
+      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test event without the test data conforming to PointerEvent type
+      result.current.handleTriggerEnter({} as any);
     });
 
-    expect(activate).toHaveBeenCalledTimes(1);
+    expect(activate).toHaveBeenCalledOnce();
 
     act(() => {
-      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test focus event without the test data conforming to FocusEvent type
-      result.current.handleTriggerLeave({ nativeEvent: {} } as any);
+      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test event without the test data conforming to PointerEvent type
+      result.current.handleTriggerLeave({} as any);
     });
 
-    expect(deactivate).toHaveBeenCalledTimes(1);
+    expect(deactivate).toHaveBeenCalledOnce();
   });
 
   it("should call onFocus, onBlur, onEnter, and onLeave callbacks", () => {
@@ -128,32 +128,32 @@ describe("usePopup", () => {
     );
 
     act(() => {
-      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test focus event without the test data conforming to FocusEvent type
-      result.current.handleTriggerFocus({ nativeEvent: {} } as any);
+      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test event without the test data conforming to FocusEvent type
+      result.current.handleTriggerFocus({} as any);
     });
 
-    expect(onFocus).toHaveBeenCalledTimes(1);
+    expect(onFocus).toHaveBeenCalledOnce();
 
     act(() => {
-      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test focus event without the test data conforming to FocusEvent type
-      result.current.handleTriggerBlur({ nativeEvent: {} } as any);
+      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test event without the test data conforming to PointerEvent type
+      result.current.handleTriggerBlur({} as any);
     });
 
-    expect(onBlur).toHaveBeenCalledTimes(1);
+    expect(onBlur).toHaveBeenCalledOnce();
 
     act(() => {
-      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test focus event without the test data conforming to FocusEvent type
-      result.current.handleTriggerEnter({ nativeEvent: {} } as any);
+      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test event without the test data conforming to PointerEvent type
+      result.current.handleTriggerEnter({} as any);
     });
 
-    expect(onEnter).toHaveBeenCalledTimes(1);
+    expect(onEnter).toHaveBeenCalledOnce();
 
     act(() => {
-      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test focus event without the test data conforming to FocusEvent type
-      result.current.handleTriggerLeave({ nativeEvent: {} } as any);
+      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test event without the test data conforming to PointerEvent type
+      result.current.handleTriggerLeave({} as any);
     });
 
-    expect(onLeave).toHaveBeenCalledTimes(1);
+    expect(onLeave).toHaveBeenCalledOnce();
   });
 
   it("should pass props to useWindowFitment", () => {
@@ -171,5 +171,56 @@ describe("usePopup", () => {
     expect(vi.mocked(useWindowFitment)).toHaveBeenCalledWith({
       isOpen: true,
     });
+  });
+
+  it("should close the popup when the Escape key is pressed", async () => {
+    let flag = false;
+    const activate = vi.fn(() => {
+      flag = true;
+    });
+    const deactivate = vi.fn(() => {
+      flag = false;
+    });
+
+    vi.mocked(useDelayedToggle).mockImplementation(() => ({
+      flag,
+      activate,
+      deactivate,
+    }));
+
+    const { result } = renderHook(() => usePopup({}));
+
+    act(() => {
+      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test event without the test data conforming to FocusEvent type
+      result.current.handleTriggerFocus({} as any);
+    });
+
+    expect(activate).toHaveBeenCalledOnce();
+
+    act(() => {
+      const event = new KeyboardEvent("keydown", { key: "Escape" });
+      document.dispatchEvent(event);
+    });
+
+    expect(deactivate).toHaveBeenCalledOnce();
+  });
+
+  it("should not open the popup on hover (trigger enter) if the trigger is disabled", () => {
+    const activate = vi.fn();
+    const deactivate = vi.fn();
+    vi.mocked(useDelayedToggle).mockReturnValue({
+      flag: false,
+      activate,
+      deactivate,
+    });
+
+    const { result } = renderHook(() => usePopup({}));
+
+    act(() => {
+      // biome-ignore lint/suspicious/noExplicitAny: Allow firing a test event without the test data conforming to PointerEvent type
+      result.current.handleTriggerEnter({ target: { disabled: true } } as any);
+    });
+
+    expect(activate).not.toHaveBeenCalled();
   });
 });

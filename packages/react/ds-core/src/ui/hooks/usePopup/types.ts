@@ -25,7 +25,13 @@ export interface UsePopupProps
   onShow?: (event?: Event) => void;
   /** A callback to be called when the popup is hidden. */
   onHide?: (event?: Event) => void;
+  /** Whether the popup should close when the escape key is pressed. Defaults to true. */
+  closeOnEscape?: boolean;
 }
+
+export type DisableableElement = HTMLElement & {
+  disabled: boolean;
+};
 
 export interface UsePopupResult extends UseWindowFitmentResult {
   /**
