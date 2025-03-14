@@ -6,49 +6,46 @@ import {
 } from "react";
 import type {
   ExampleConfigurations,
-  ExampleControlStateChangeEventContext,
   ExampleControlsProps,
 } from "./types.js";
 import "./styles.css";
-import { Button, Tooltip } from "@canonical/react-ds-core";
+import {Button, TooltipArea} from "@canonical/react-ds-core";
+import {eventBus} from "./eventBus.js";
 
 const ExampleControls = ({
-  example,
-  id,
-  className,
-}: ExampleControlsProps): ReactElement => {
+                           example,
+                           id,
+                           className,
+                         }: ExampleControlsProps): ReactElement => {
   const [configuration, setConfiguration] = useState<ExampleConfigurations>(
     example.configurations,
   );
 
   useEffect(() => {
-    const event = new CustomEvent<ExampleControlStateChangeEventContext>(
-      "example-style-changed",
-      {
-        detail: {
-          styles: {
-            "--font-family": configuration.fontFamily?.value,
-            "--font-size": `${configuration.fontSize?.value}px`,
-          },
+    const detail = {
+      detail: {
+        styles: {
+          "--font-family": configuration.fontFamily?.value,
+          "--font-size": `${configuration.fontSize?.value}px`,
         },
-        bubbles: true,
-        composed: true,
       },
-    );
-    document.dispatchEvent(event);
+      bubbles: true,
+      composed: true,
+    };
+    eventBus.emit("example-style-changed", detail, document.getElementById('js-event-root') as HTMLElement);
   }, [configuration]);
 
   const handleFontFamilyChange = (event: ChangeEvent<HTMLSelectElement>) => {
     if (!configuration.fontFamily) {
       setConfiguration({
         ...configuration,
-        fontFamily: { choices: ["Arial"], default: "Arial", value: "Arial" },
+        fontFamily: {choices: ["Arial"], default: "Arial", value: "Arial"},
       });
       return;
     }
     setConfiguration({
       ...configuration,
-      fontFamily: { ...configuration.fontFamily, value: event.target.value },
+      fontFamily: {...configuration.fontFamily, value: event.target.value},
     });
   };
 
@@ -56,7 +53,7 @@ const ExampleControls = ({
     if (!configuration.fontSize) {
       setConfiguration({
         ...configuration,
-        fontSize: { min: 0, max: 100, default: 16, value: 16 },
+        fontSize: {min: 0, max: 100, default: 16, value: 16},
       });
       return;
     }
@@ -77,22 +74,21 @@ const ExampleControls = ({
         .filter(Boolean)
         .join(" ")}
       // TODO, this should be some grid row class once grid is implemented
-      style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+      style={{display: "flex", flexDirection: "row", alignItems: "center"}}
     >
-      <Tooltip
-        autoAdjust={true}
-        position="topCenter"
-        showDelay={0}
-        message={
+      <TooltipArea
+        preferredDirections={["top"]}
+        activateDelay={0}
+        Message={
           <div
             className={"ds example-controls__inputs"}
-            style={{ minWidth: "250px" }}
+            style={{minWidth: "250px"}}
           >
             {configuration.fontFamily && (
-              <div style={{ marginBottom: "8px" }}>
+              <div style={{marginBottom: "8px"}}>
                 <label
                   htmlFor="fontFamilySelect"
-                  style={{ display: "block", marginBottom: "4px" }}
+                  style={{display: "block", marginBottom: "4px"}}
                 >
                   Font Family:
                 </label>
@@ -103,7 +99,7 @@ const ExampleControls = ({
                     configuration.fontFamily?.default
                   }
                   onChange={handleFontFamilyChange}
-                  style={{ width: "100%" }}
+                  style={{width: "100%"}}
                 >
                   {configuration.fontFamily.choices.map((font) => (
                     <option key={font} value={font}>
@@ -117,11 +113,11 @@ const ExampleControls = ({
               <div>
                 <label
                   htmlFor="fontSizeRange"
-                  style={{ display: "block", marginBottom: "4px" }}
+                  style={{display: "block", marginBottom: "4px"}}
                 >
                   Font Size:
                 </label>
-                <div style={{ display: "flex", alignItems: "center" }}>
+                <div style={{display: "flex", alignItems: "center"}}>
                   <input
                     type="range"
                     id="fontSizeRange"
@@ -134,9 +130,9 @@ const ExampleControls = ({
                     aria-valuemax={configuration.fontSize.max}
                     aria-valuenow={configuration.fontSize?.value}
                     aria-valuetext={`${configuration.fontSize?.value} pixels`}
-                    style={{ flexGrow: 1 }} // Allow range input to grow
+                    style={{flexGrow: 1}} // Allow range input to grow
                   />
-                  <span style={{ marginLeft: "8px", whiteSpace: "nowrap" }}>
+                  <span style={{marginLeft: "8px", whiteSpace: "nowrap"}}>
                     {configuration.fontSize?.value}px
                   </span>
                 </div>
@@ -145,8 +141,8 @@ const ExampleControls = ({
           </div>
         }
       >
-        <Button label={"Configure"} />
-      </Tooltip>
+        <Button label={"Configure"}/>
+      </TooltipArea>
     </div>
   );
 };

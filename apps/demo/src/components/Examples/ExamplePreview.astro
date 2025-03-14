@@ -51,23 +51,3 @@ interface Props {
         padding: var(--spacing-input-padding-vertical)
     }
 </style>
-
-<script>
-  import {ExampleControlStateChangeEventContext} from "./ExampleControls";
-
-  document.addEventListener('example-style-changed', ($event: Event) => {
-    const exampleDisplay = document.querySelector('.example-renderer__content') as HTMLElement;
-    const event = $event as CustomEvent<ExampleControlStateChangeEventContext>;
-
-    // Clear old styles
-    for (const key in exampleDisplay.style) {
-      exampleDisplay.style.removeProperty(key);
-    }
-
-    // Apply new styles
-    const entries = Object.entries(event.detail.styles);
-    for (const [key, value] of entries) {
-      exampleDisplay.style.setProperty(key, value);
-    }
-  });
-</script>
