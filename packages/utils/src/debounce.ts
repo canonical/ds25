@@ -29,8 +29,8 @@ export default function debounce<
       clearTimeout(timeoutId);
     }
 
-    return new Promise<ReturnType<F>>((resolve) => {
-      timeoutId = setTimeout(() => {
+    return new Promise<ReturnType<F>>((resolve, reject) => {
+      timeoutId = setTimeout(async () => {
         // Timer hasn't been cancelled, call the function
         resolve(fn(...args));
       }, delay);
