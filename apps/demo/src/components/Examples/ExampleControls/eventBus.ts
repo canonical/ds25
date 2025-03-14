@@ -1,12 +1,6 @@
 class EventBus extends EventTarget {
-  emit(event, detail, evtRoot?: HTMLElement) {
-    const customEvent = new CustomEvent(event, { detail });
-    console.log({ event, detail, evtRoot });
-    // if (evtRoot) {
-    evtRoot?.dispatchEvent(customEvent);
-    // } else {
-    this.dispatchEvent(customEvent);
-    // }
+  emit(event, detail) {
+    this.dispatchEvent(new CustomEvent(event, { detail }));
   }
 
   subscribe(event, callback) {

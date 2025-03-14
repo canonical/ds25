@@ -1,5 +1,5 @@
+import type { ExampleConfigurations } from "../ExampleControls/index.js";
+
 export interface ExampleComponentProps {
-  id?: string;
-  className?: string;
-  styles?: Record<string, string | number | undefined>;
+  initialConfig: ExampleConfigurations;
 }

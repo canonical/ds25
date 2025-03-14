@@ -8,8 +8,10 @@ interface Props {
 }
 ---
 
-<div class="ds example" id="js-event-root">
+<div class="ds example">
   {example.type === "react" && (
-          <Button client:only="react"></Button>
-    )}
-  </div>
+          // TODO actually populate the initialconfig from url params etc
+          // TODO use the example controller etc to actually get the correct example, instead of hardocding button
+          <Button initialConfig={{}} client:only="react"></Button>
+  )}
+</div>

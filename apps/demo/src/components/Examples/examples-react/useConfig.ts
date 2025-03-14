@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { eventBus } from "../ExampleControls/eventBus.js";
+import type { ExampleConfigurations } from "../ExampleControls/index.js";
 
-export default function useConfig() {
-  const [config, setConfig] = useState({});
+export default function useConfig<
+  TConfig extends ExampleConfigurations = ExampleConfigurations,
+>(initialConfig: TConfig) {
+  const [config, setConfig] = useState(initialConfig);
 
   useEffect(
     () =>
@@ -11,10 +14,6 @@ export default function useConfig() {
       }),
     [],
   );
-
-  useEffect(() => {
-    console.log(config);
-  }, [config]);
 
   return config;
 }

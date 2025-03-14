@@ -29,11 +29,7 @@ const ExampleControls = ({
       bubbles: true,
       composed: true,
     };
-    eventBus.emit(
-      "example-style-changed",
-      detail,
-      document.getElementById("js-event-root") as HTMLElement,
-    );
+    eventBus.emit("example-style-changed", detail);
   }, [configuration]);
 
   const handleFontFamilyChange = (event: ChangeEvent<HTMLSelectElement>) => {
