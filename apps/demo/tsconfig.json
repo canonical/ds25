@@ -1,5 +1,0 @@
-{
-  "extends": "@canonical/typescript-config-react",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"]
-}
