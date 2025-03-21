@@ -1,15 +1,16 @@
-/* @canonical/generator-ds 0.9.0-experimental.4 */
+/* @canonical/generator-ds 0.9.0-experimental.9 */
 
 // Needed for function-based story, safe to remove otherwise
-// import type { FieldProps } from './types.js'
+// import type { SimpleChoicesProps } from './types.js'
 import type { Meta, StoryObj } from "@storybook/react";
 import * as decorators from "storybook/decorators.js";
-import Component from "./Field.js";
+import * as fixtures from "storybook/fixtures.options.js";
+import Component from "./SimpleChoices.js";
 // Needed for template-based story, safe to remove otherwise
 // import type { StoryFn } from '@storybook/react'
 
 const meta = {
-  title: "Field",
+  title: "SimpleChoices",
   component: Component,
   decorators: [decorators.form()],
 } satisfies Meta<typeof Component>;
@@ -25,32 +26,23 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    name: "full_name",
-    inputType: "text",
+    name: "select",
+    options: fixtures.base,
   },
 };
 
-export const TypeTextarea: Story = {
+export const Multiple: Story = {
   args: {
-    name: "content",
-    inputType: "textarea",
+    name: "select2",
+    options: fixtures.base,
+    isMultiple: true,
   },
 };
 
-export const TypeCheckbox: Story = {
+export const WithDisabledOption: Story = {
   args: {
-    name: "subscribe",
-    inputType: "checkbox",
-  },
-};
-
-const CustomComponent = () => <span>SomeExotic Input</span>;
-
-export const TypeCustom: Story = {
-  args: {
-    name: "exotic",
-    inputType: "custom",
-    CustomComponent,
+    name: "select3",
+    options: fixtures.withDisabled,
   },
 };
 
@@ -59,7 +51,7 @@ export const TypeCustom: Story = {
   Direct arguments passed to the component
   Simple, but can lead to repetition if used across multiple stories with similar configurations
 
-  export const Default = (args: FieldProps) => <Component {...args} />;
+  export const Default = (args: SimpleChoicesProps) => <Component {...args} />;
   Default.args = { children: <span>Hello world!</span> };
 */
 

@@ -22,14 +22,14 @@ const Label = ({
   name,
   isOptional,
   messages = defaultMessages,
-  namePrefix = "form-",
+  htmlFor,
   tag: Element = "label",
 }: LabelProps): React.ReactElement => {
   return (
     <Element
       id={id}
       style={style}
-      htmlFor={Element === "label" ? `${namePrefix}${name}` : undefined}
+      htmlFor={Element === "label" ? htmlFor : undefined}
       className={[componentCssClassName, className].filter(Boolean).join(" ")}
     >
       {children || name}

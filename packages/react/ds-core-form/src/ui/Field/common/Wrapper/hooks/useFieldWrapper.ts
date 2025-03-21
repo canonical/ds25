@@ -54,9 +54,10 @@ const useFieldWrapper = (
 
   const { unregister } = useFormContext();
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Comparing the `name` suffices
   useEffect(
     () => () => (unregisterOnUnmount ? unregister(name) : undefined),
-    [unregisterOnUnmount, name, unregister],
+    [name],
   );
 
   return {

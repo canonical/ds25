@@ -17,6 +17,7 @@ const Textarea = ({
   style,
   name,
   registerProps,
+  ...otherProps
 }: TextareaProps): React.ReactElement => {
   const { register } = useFormContext();
   return (
@@ -24,9 +25,10 @@ const Textarea = ({
       id={id}
       style={style}
       className={[componentCssClassName, className].filter(Boolean).join(" ")}
+      {...otherProps}
       {...register(name, registerProps)}
     />
   );
 };
 
-export default withWrapper(Textarea);
+export default withWrapper<TextareaProps>(Textarea);

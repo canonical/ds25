@@ -1,6 +1,7 @@
 /* @canonical/generator-ds 0.9.0-experimental.4 */
 import type React from "react";
-import type { WrapperProps } from "./types.js";
+import { useMemo } from "react";
+import type { BaseInputProps, WrapperProps } from "../../types.js";
 import "./styles.css";
 import { Description, Error as FieldError, Label } from "../index.js";
 import { useFieldWrapper } from "./hooks/index.js";
@@ -11,9 +12,8 @@ const componentCssClassName = "ds form-wrapper";
  * description of the Wrapper component
  * @returns {React.ReactElement} - Rendered Wrapper
  */
-const Wrapper = ({
+const Wrapper = <ComponentProps extends BaseInputProps>({
   id,
-  children,
   className,
   style,
 
@@ -28,7 +28,7 @@ const Wrapper = ({
 
   mockLabel = false,
   ...otherProps
-}: WrapperProps): React.ReactElement => {
+}: WrapperProps<ComponentProps>): React.ReactElement => {
   const { fieldError, isError, ariaProps, registerProps } = useFieldWrapper(
     name,
     {
@@ -39,6 +39,17 @@ const Wrapper = ({
       unregisterOnUnmount,
     },
   );
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: -
+  const componentProps = useMemo(
+    () => ({
+      name,
+      registerProps,
+      ...ariaProps.input,
+      ...otherProps,
+    }),
+    [name, registerProps, ariaProps.input],
+  ) as unknown as ComponentProps;
 
   return (
     <div
@@ -55,18 +66,12 @@ const Wrapper = ({
       >
         {label}
       </Label>
-      <Component
-        name={name}
-        registerProps={registerProps}
-        {...ariaProps.input}
-        {...otherProps}
-      />
+      <Component {...componentProps} />
       {isError && (
         <FieldError {...ariaProps.error}>
           {fieldError?.message?.toString()}
         </FieldError>
       )}
-      {children}
     </div>
   );
 };

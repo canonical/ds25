@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import Component from "./Field.js";
-import { InputType } from "./types.js";
 
 describe("Field component", () => {
   // it("renders", () => {

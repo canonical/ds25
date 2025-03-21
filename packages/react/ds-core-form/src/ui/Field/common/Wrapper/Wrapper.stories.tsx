@@ -8,7 +8,6 @@ import {
   Text as TextInput,
   Textarea as TextareaInput,
 } from "../../inputs/index.js";
-import type { BaseInputProps } from "../../inputs/types.js";
 import Component from "./Wrapper.js";
 // Needed for template-based story, safe to remove otherwise
 // import type { StoryFn } from '@storybook/react'

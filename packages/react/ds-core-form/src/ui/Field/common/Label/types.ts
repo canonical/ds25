@@ -18,8 +18,8 @@ export interface LabelProps {
   style?: React.CSSProperties;
   /* The name of input labelled */
   name: string;
-  /* The prefix for the name */
-  namePrefix?: string;
+  /* Should reference the ID of the input */
+  htmlFor?: string;
   /* Is the field optional */
   isOptional?: boolean;
   /* Custom messages */

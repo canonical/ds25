@@ -31,4 +31,6 @@ const Text = ({
   );
 };
 
-export default withWrapper(Text);
+export type MyComp = typeof Text;
+
+export default withWrapper<TextProps>(Text);

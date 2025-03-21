@@ -1,7 +1,13 @@
 /* @canonical/generator-ds 0.9.0-experimental.4 */
 import type React from "react";
-import { Checkbox, Text, Textarea } from "./inputs/index.js";
-import { InputType } from "./types.js";
+import {
+  Checkbox,
+  Range,
+  Select,
+  SimpleChoices,
+  Text,
+  Textarea,
+} from "./inputs/index.js";
 import type { FieldProps } from "./types.js";
 
 /**
@@ -18,6 +24,12 @@ const Field = ({
       return <Textarea {...props} />;
     case "checkbox":
       return <Checkbox {...props} />;
+    case "range":
+      return <Range {...props} />;
+    case "select":
+      return <Select {...props} />;
+    case "simple-choices":
+      return <SimpleChoices {...props} />;
     case "custom":
       // @ts-ignore // TODO Add special type for both or none
       return <CustomComponent {...props} />;
