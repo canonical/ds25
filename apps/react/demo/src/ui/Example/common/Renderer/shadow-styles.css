@@ -1,3 +1,5 @@
+@import url("@canonical/styles");
+
 .ds.shadow-container {
   all: initial;
   isolation: isolate;
@@ -7,4 +9,6 @@
   font-family: var(--font-family);
   font-size: var(--font-size);
   line-height: var(--line-height);
+  color: var(--text-color);
+  background-color: var(--text-color);
 }

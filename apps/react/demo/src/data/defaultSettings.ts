@@ -2,11 +2,11 @@ import type { ExampleControl, ExampleSetting } from "../ui/Example/index.js";
 
 export const FONT_CONTROL: (props: Partial<ExampleSetting>) => ExampleControl =
   ({
-    defaultValue = "Arial",
+    defaultValue = "Ubuntu variable",
     options = [
       { value: "Arial", label: "Arial" },
       { value: "Times New Roman", label: "Times New Roman" },
-      { value: "Ubuntu", label: "Ubuntu" },
+      { value: "Ubuntu variable", label: "Ubuntu" },
     ],
   }) => ({
     name: "--font-family",
