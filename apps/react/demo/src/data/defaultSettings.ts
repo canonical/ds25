@@ -1,40 +1,67 @@
-import type { ExampleControl } from "../ui/Example/index.js";
+import type { ExampleControl, ExampleSetting } from "../ui/Example/index.js";
 
-export const FONT_CONTROL: ExampleControl = {
-  name: "fontFamily",
-  label: "Font family",
-  type: "choices",
-  value: "Arial",
-  default: "Arial",
-  choices: ["Arial", "Helvetica", "Times New Roman"],
-};
+export const FONT_CONTROL: (props: Partial<ExampleSetting>) => ExampleControl =
+  ({
+    defaultValue = "Ubuntu variable",
+    options = [
+      { value: "Arial", label: "Arial" },
+      { value: "Times New Roman", label: "Times New Roman" },
+      { value: "Ubuntu variable", label: "Ubuntu" },
+    ],
+  }) => ({
+    name: "--font-family",
+    label: "Font family",
+    inputType: "select",
+    value: defaultValue,
+    defaultValue,
+    options,
+  });
 
-export const FONT_SIZE_CONTROL: ExampleControl = {
-  name: "fontSize",
-  type: "number",
+export const FONT_SIZE_CONTROL: (
+  props: Partial<ExampleSetting<number>>,
+) => ExampleControl = ({
+  min = 12,
+  max = 24,
+  step = 1,
+  defaultValue = 16,
+}) => ({
+  name: "--font-size",
+  inputType: "range",
   label: "Font size",
-  value: 16,
-  default: 16,
-  min: 12,
-  max: 24,
+  value: defaultValue,
+  defaultValue,
+  min,
+  max,
+  step,
   transformer: (fontSize) => `${fontSize}px`,
-};
+});
 
-export const LINE_HEIGHT_CONTROL: ExampleControl = {
-  name: "lineHeight",
-  type: "number",
+export const LINE_HEIGHT_CONTROL: (
+  props: Partial<ExampleSetting<number>>,
+) => ExampleControl = ({
+  min = 0.5,
+  max = 4,
+  step = 0.5,
+  defaultValue = 1.5,
+}) => ({
+  name: "--line-height",
+  inputType: "range",
   label: "Line height",
-  value: 1.5,
-  default: 1.5,
-  min: 0.5,
-  max: 4,
-  step: 0.5,
-};
+  value: defaultValue,
+  defaultValue,
+  min,
+  max,
+  step,
+});
 
-const DEFAULT_CONTROLS: ExampleControl[] = [
-  FONT_CONTROL,
-  FONT_SIZE_CONTROL,
-  LINE_HEIGHT_CONTROL,
+/**
+ * Returns the default controls.
+ * Clones the controls so that examples can have their own state.
+ */
+const DEFAULT_CONTROLS: () => ExampleControl[] = () => [
+  FONT_CONTROL({}),
+  FONT_SIZE_CONTROL({}),
+  LINE_HEIGHT_CONTROL({}),
 ];
 
 export default DEFAULT_CONTROLS;
