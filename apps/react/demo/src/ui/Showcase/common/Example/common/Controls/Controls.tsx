@@ -2,9 +2,20 @@ import type { ReactElement } from "react";
 import type { ControlsProps } from "./types.js";
 import "./styles.css";
 import { Button, TooltipArea } from "@canonical/react-ds-core";
+import { Field } from "@canonical/react-ds-core-form";
+import { useConfig } from "../../hooks/index.js";
+
 const componentCssClassname = "ds example-controls";
 
 const Controls = ({ id, className, style }: ControlsProps): ReactElement => {
+  const {
+    activeExample,
+    output,
+    handlePrevExample,
+    handleNextExample,
+    handleCopyOutput,
+  } = useConfig();
+
   return (
     <div
       id={id}
@@ -18,8 +29,8 @@ const Controls = ({ id, className, style }: ControlsProps): ReactElement => {
     >
       <div>
         {/*TODO use icon buttons when icon is implemented*/}
-        {/*<Button label={"Prev"} onClick={handlePrevExample} />*/}
-        {/*<Button label="Next" onClick={handleNextExample} />*/}
+        <Button label={"Prev"} type="button" onClick={handlePrevExample} />
+        <Button label="Next" type="button" onClick={handleNextExample} />
       </div>
       <TooltipArea
         // TODO use new form components when ready
@@ -28,16 +39,34 @@ const Controls = ({ id, className, style }: ControlsProps): ReactElement => {
         targetElementClassName={"config-button"}
         activateDelay={0}
         autoFit={true}
-        Message={<div className="inputs">Inputs coming soon</div>}
+        Message={
+          <div className="inputs">
+            {activeExample.controls.map(
+              ({
+                defaultValue,
+                transformer,
+                disabledOutputFormats,
+                ...control
+              }) => (
+                <Field
+                  key={control.name}
+                  unregisterOnUnmount={false}
+                  {...control}
+                />
+              ),
+            )}
+          </div>
+        }
       >
         <Button label="Configure" />
       </TooltipArea>
-      {/*<Button*/}
-      {/*  label="Copy"*/}
-      {/*  style={{ marginLeft: "auto" }}*/}
-      {/*  disabled={!activeExample?.output?.css}*/}
-      {/*  onClick={handleCopyCss}*/}
-      {/*/>*/}
+      <Button
+        type="button"
+        label="Copy"
+        style={{ marginLeft: "auto" }}
+        disabled={!output?.css}
+        onClick={() => handleCopyOutput("css")}
+      />
     </div>
   );
 };
