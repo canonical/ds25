@@ -42,31 +42,37 @@ const Controls = ({ id, className, style }: ControlsProps): ReactElement => {
         title={`${activeExample.name} settings`}
         isOpenOverride={settingsOpen}
         onClose={() => setSettingsOpen(false)}
+        contentsClassName="inputs-drawer-contents"
       >
         <Button
           label={"Reset to defaults"}
           type={"button"}
           onClick={resetActiveExample}
         />
-        <hr />
-        <div className="inputs">
-          {activeExample.fields.map(
-            ({
-              name,
-              defaultValue,
-              transformer,
-              disabledOutputFormats,
-              ...fieldProps
-            }) => (
-              <Field
-                name={name}
-                key={name}
-                unregisterOnUnmount={false}
-                {...fieldProps}
-              />
-            ),
-          )}
-        </div>
+
+        {activeExample.fieldCategories.map((category) => (
+          <div className="setting-category" key={category.label}>
+            <h4>{category.label}</h4>
+            <div className="inputs">
+              {category.fields.map(
+                ({
+                  name,
+                  defaultValue,
+                  transformer,
+                  disabledOutputFormats,
+                  ...fieldProps
+                }) => (
+                  <Field
+                    name={name}
+                    key={name}
+                    unregisterOnUnmount={false}
+                    {...fieldProps}
+                  />
+                ),
+              )}
+            </div>
+          </div>
+        ))}
       </Drawer>
       <div className="end">
         <Button

@@ -18,6 +18,7 @@ const Drawer = ({
   title,
   titleId,
   className,
+  contentsClassName,
   id,
   style,
   parent,
@@ -61,7 +62,11 @@ const Drawer = ({
           </button>
         </div>
 
-        <div className="contents">{children}</div>
+        <div
+          className={["contents", contentsClassName].filter(Boolean).join(" ")}
+        >
+          {children}
+        </div>
       </dialog>
     </div>
   );

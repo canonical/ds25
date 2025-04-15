@@ -43,6 +43,9 @@ export interface DrawerProps extends UseDrawerProps {
   /** Optional additional CSS classes to apply to the drawer container. */
   className?: string;
 
+  /** Optional additional CSS classes to apply to the drawer contents. */
+  contentsClassName?: string;
+
   /** A unique identifier for the main Drawer element */
   id?: string;
   /** Inline styles for the main Drawer element */
