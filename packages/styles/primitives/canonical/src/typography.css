@@ -12,6 +12,7 @@ TODO
   --font-family-mono: "Ubuntu Mono variable", "Ubuntu Mono", Consolas, Monaco,
     Courier, monospace;
   --text-max-width: 40em;
+  --font-size: 16px;
 }
 
 :root {
@@ -27,7 +28,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: var(--font-size);
   line-height: var(--line-height-default);
   text-wrap: pretty;
 }

@@ -1,8 +1,8 @@
-import DEFAULT_CATEGORIES from "data/fields.js";
+import { ROOT_CATEGORY } from "data/fields.js";
 import type { FieldCategory } from "ui/index.js";
 
 const fieldCategories: FieldCategory[] = [
-  ...DEFAULT_CATEGORIES,
+  ROOT_CATEGORY,
   {
     label: "Misc",
     fields: [

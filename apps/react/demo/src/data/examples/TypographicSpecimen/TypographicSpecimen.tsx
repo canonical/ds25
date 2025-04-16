@@ -80,9 +80,7 @@ const TypographicSpecimen: ShowcaseComponent = () => {
           <h2 className="grid-title">Grid</h2>
 
           <div className="lorem-ipsum-block">
-            <h6>
-              <strong>Lorem ipsum dolor sit</strong>
-            </h6>
+            <h6>Lorem ipsum dolor sit</h6>
             <p>
               Lorem ipsum dolor sit amet consectetur. Gravida leo sit a
               lobortis. Vulputate leo at eu pellentesque mattis amet volutpat

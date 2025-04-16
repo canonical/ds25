@@ -1,11 +1,12 @@
 import type { RendererProps } from "./types.js";
+
 const componentCssClassname = "ds example-renderer";
 import root from "react-shadow";
 import { useShowcaseContext } from "../../hooks/index.js";
 import shadowCss from "./shadow-styles.css?inline";
 
 const Renderer = ({ style, className }: RendererProps) => {
-  const { activeExample, output, activeExampleFormValues } =
+  const { activeExample, demoOutput, activeExampleFormValues } =
     useShowcaseContext();
 
   return (
@@ -16,7 +17,7 @@ const Renderer = ({ style, className }: RendererProps) => {
       <h3>{activeExample.name}</h3>
       <p>{activeExample.description}</p>
       {activeExample?.Component && (
-        <root.div style={output.css} mode={"closed"}>
+        <root.div style={demoOutput.css} mode={"closed"}>
           <style>{shadowCss}</style>
           <div className="ds shadow-container">
             <activeExample.Component {...activeExampleFormValues} />

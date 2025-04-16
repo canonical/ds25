@@ -1,6 +1,11 @@
 /** Global field settings for commonly-used fields. */
 
-import type { ExampleControlField, FieldCategory } from "../ui/index.js";
+import type {
+  ExampleControlField,
+  ExampleSettingValue,
+  FieldCategory,
+} from "../ui/index.js";
+import { PX_TRANSFORMER, REM_TRANSFORMER } from "./transformers.js";
 
 export const FONT_FAMILY_FIELD: ExampleControlField = {
   name: "--font-family",
@@ -22,7 +27,23 @@ export const FONT_SIZE_FIELD: ExampleControlField = {
   min: 12,
   max: 24,
   step: 1,
-  transformer: (fontSize) => `${fontSize}px`,
+  demoTransformer: PX_TRANSFORMER,
+};
+
+/**
+ * A field for the baseline height.
+ * This is hidden and held constant to simplify the other settings, as many things currently depend on the baseline height.
+ * By including it in the form, it will be included in the exported CSS, and usable as part of `calc()` expressions in exports.
+ */
+export const BASELINE_HEIGHT_FIELD: ExampleControlField = {
+  name: "--baseline-height",
+  inputType: "hidden",
+  label: "Baseline height",
+  defaultValue: 0.5,
+  min: 0.5,
+  max: 2,
+  step: 0.25,
+  demoTransformer: REM_TRANSFORMER,
 };
 
 export const LINE_HEIGHT_FIELD: ExampleControlField = {
@@ -30,25 +51,20 @@ export const LINE_HEIGHT_FIELD: ExampleControlField = {
   inputType: "range",
   label: "Root line height",
   defaultValue: 1.5,
-  min: 0.125,
+  min: 1,
   max: 12,
-  step: 0.125,
-  transformer: (lineHeight) => `${lineHeight}rem`,
+  step: 0.25,
 };
 
-const DEFAULT_CATEGORIES: FieldCategory[] = [
-  {
-    label: "Typeface",
-    fields: [FONT_FAMILY_FIELD],
-  },
-  {
-    label: "Font size",
-    fields: [FONT_SIZE_FIELD],
-  },
-  {
-    label: "Line height",
-    fields: [LINE_HEIGHT_FIELD],
-  },
-];
-
-export default DEFAULT_CATEGORIES;
+export const ROOT_CATEGORY: FieldCategory = {
+  label: "Root",
+  fields: [
+    {
+      ...FONT_FAMILY_FIELD,
+      defaultValue: "Times New Roman",
+    },
+    FONT_SIZE_FIELD,
+    LINE_HEIGHT_FIELD,
+    BASELINE_HEIGHT_FIELD,
+  ],
+};

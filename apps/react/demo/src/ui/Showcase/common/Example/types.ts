@@ -20,7 +20,7 @@ export interface ContextOptions {
   /** Resets the active example to its default state */
   resetActiveExample: () => void;
   /** The output values (e.g. CSS) for the currently active example */
-  output: Output;
+  demoOutput: Output;
   /** Function to copy the output values of a format  */
   copyOutput: (format: ExampleOutputFormat) => void;
   /** Switches to the previous example */
@@ -55,8 +55,10 @@ export interface ExampleControlField extends FieldProps {
   disabledOutputFormats?: {
     [key in ExampleOutputFormat]?: boolean;
   };
-  /** Transformer function to apply to output values */
-  transformer?: (value: ExampleSettingValue) => ExampleSettingValue;
+  /** Transformer function to apply to demo output values */
+  demoTransformer?: (value: ExampleSettingValue) => ExampleSettingValue;
+  /** Transformer function to apply to exported values */
+  exportTransformer?: (value: ExampleSettingValue) => ExampleSettingValue;
   /**
    * A default value for the control field.
    * This is not directly consumed by the field, but it is used to set the initial value in the form state.
@@ -65,6 +67,14 @@ export interface ExampleControlField extends FieldProps {
 
   [ORIGINAL_VAR_NAME_KEY]?: string;
 }
+
+/**
+ * All transformers that can be applied to a field.
+ * This is useful for applying different transforms to the same field.
+ */
+export type ExampleControlFieldAllTransformers = Required<
+  Pick<ExampleControlField, "exportTransformer" | "demoTransformer">
+>;
 
 /** The actual component that is rendered for an example. */
 export type ShowcaseComponent = (state: FormValues) => ReactElement;

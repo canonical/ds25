@@ -39,40 +39,65 @@ const useProviderState = ({
     });
   }, [examples]);
 
+  /** The fields that are included in output (demo, exports) for a given format */
+  const outputFields = useCallback(
+    (format: ExampleOutputFormat) =>
+      activeExample.fields.filter(
+        (field) =>
+          !field.disabledOutputFormats?.[format] &&
+          field[ORIGINAL_VAR_NAME_KEY],
+      ),
+    [activeExample],
+  );
+
   /** The output values for the active example */
-  const output: Output = useMemo(
+  const demoOutput: Output = useMemo(
     () =>
       outputFormats.reduce((acc, format: ExampleOutputFormat) => {
         acc[format] = Object.fromEntries(
-          activeExample.fields
-            .filter(
-              (field) =>
-                !field.disabledOutputFormats?.[format] &&
-                field[ORIGINAL_VAR_NAME_KEY],
-            )
-            .map((field) => {
-              const { [ORIGINAL_VAR_NAME_KEY]: name, transformer } = field;
-              const rawVal = formValues[activeExample.name]?.[name as string];
-              const val = transformer ? transformer(rawVal) : rawVal;
-              return [name, val];
-            }),
+          outputFields(format).map((field) => {
+            const { [ORIGINAL_VAR_NAME_KEY]: name, demoTransformer } = field;
+            const rawVal = formValues[activeExample.name]?.[name as string];
+            const val = demoTransformer ? demoTransformer(rawVal) : rawVal;
+            return [name, val];
+          }),
         );
         return acc;
       }, {} as Output),
-    [outputFormats, activeExample, formValues],
+    [outputFormats, activeExample, formValues, outputFields],
   );
 
   /** Copy the output values to the clipboard */
   const copyOutput = useCallback(
     (format: ExampleOutputFormat) => {
-      if (typeof window === "undefined" || !output[format]) return;
+      if (typeof window === "undefined" || !demoOutput[format]) return;
       navigator.clipboard.writeText(
-        Object.entries(output[format])
+        Object.entries(
+          Object.fromEntries(
+            outputFields(format)
+              // Organize the exported fields by alphabetizing them
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((field) => {
+                const {
+                  [ORIGINAL_VAR_NAME_KEY]: name,
+                  exportTransformer,
+                  demoTransformer,
+                } = field;
+                const rawVal = formValues[activeExample.name]?.[name as string];
+                const val = exportTransformer
+                  ? exportTransformer(rawVal)
+                  : demoTransformer
+                    ? demoTransformer(rawVal)
+                    : rawVal;
+                return [name, val];
+              }),
+          ),
+        )
           .map((d) => `${d[0]}: ${d[1]};`)
           .join("\n"),
       );
     },
-    [output],
+    [demoOutput, outputFields, activeExample, formValues],
   );
 
   /** The settings for the active example */
@@ -118,7 +143,7 @@ const useProviderState = ({
       copyOutput,
       activatePrevExample,
       activateNextExample,
-      output,
+      demoOutput: demoOutput,
       activeExampleFormValues,
       resetActiveExample,
     }),
@@ -129,7 +154,7 @@ const useProviderState = ({
       copyOutput,
       activatePrevExample,
       activateNextExample,
-      output,
+      demoOutput,
       activeExampleFormValues,
       resetActiveExample,
     ],
