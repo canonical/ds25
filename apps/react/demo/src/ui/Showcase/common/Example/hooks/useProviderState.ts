@@ -14,7 +14,7 @@ const useProviderState = ({
   // Default to the first item if available
   const [activeExampleIndex, setActiveExampleIndex] = useState(0);
   const { defaultValues, examples } = useExampleRHFInterface();
-  const { setValue, getValues } = useFormContext();
+  const { setValue, getValues, watch } = useFormContext();
 
   const formValues = useWatch();
 
@@ -22,6 +22,8 @@ const useProviderState = ({
     () => examples[activeExampleIndex],
     [activeExampleIndex, examples],
   );
+
+  const showBaselineGrid = watch("showBaselineGrid");
 
   /** Switches to the previous example */
   const activatePrevExample = useCallback(() => {
@@ -146,6 +148,7 @@ const useProviderState = ({
       demoOutput: demoOutput,
       activeExampleFormValues,
       resetActiveExample,
+      showBaselineGrid,
     }),
     [
       activeExampleIndex,
@@ -157,6 +160,7 @@ const useProviderState = ({
       demoOutput,
       activeExampleFormValues,
       resetActiveExample,
+      showBaselineGrid,
     ],
   );
 };

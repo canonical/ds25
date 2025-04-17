@@ -40,7 +40,7 @@ const useExampleRHFInterface = (): useGlobalFormResult => {
     [],
   );
 
-  const defaultValues = useMemo(
+  const exampleSettingDefaultValues: FormValues = useMemo(
     () =>
       examples.reduce(
         (exampleAcc, example) => {
@@ -68,9 +68,13 @@ const useExampleRHFInterface = (): useGlobalFormResult => {
     [examples],
   );
 
-  useEffect(() => {
-    console.log({ defaultValues, examples });
-  }, [defaultValues, examples]);
+  const defaultValues: FormValues = useMemo(
+    () => ({
+      ...exampleSettingDefaultValues,
+      showBaselineGrid: false,
+    }),
+    [exampleSettingDefaultValues],
+  );
 
   const methods = useForm({
     mode: "onChange",

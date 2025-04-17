@@ -11,9 +11,12 @@ const meta = {
 
     return (
       <FormProvider {...methods}>
-        <form>{Story()}</form>
+        <form className="h-100">{Story()}</form>
       </FormProvider>
     );
+  },
+  parameters: {
+    layout: "fullscreen",
   },
 } satisfies Meta<typeof Component>;
 

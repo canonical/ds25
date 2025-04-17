@@ -16,7 +16,7 @@ const Button = ({
         .filter(Boolean)
         .join(" ")}
       {...props}
-      aria-label={label}
+      aria-label={props["aria-label"] || label}
     >
       {label}
     </button>

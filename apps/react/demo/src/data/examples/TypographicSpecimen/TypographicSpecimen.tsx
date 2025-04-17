@@ -11,11 +11,10 @@ import style from "./styles.css?inline";
 
 const TypographicSpecimen: ShowcaseComponent = () => {
   return (
-    <>
+    <div className="specimen-container">
       <style>{style}</style>
-      <div className="typographic-specimen-container">
+      <div className="specimen-grid">
         <hr className="highlighted" />
-
         <div className="top-section-wrapper">
           <div className="column">
             <h1>This is an h1 heading</h1>
@@ -142,7 +141,7 @@ const TypographicSpecimen: ShowcaseComponent = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -29,13 +29,15 @@ export interface ContextOptions {
   activateNextExample: () => void;
   /** The settings for the current active example */
   activeExampleFormValues: FormValues;
+  /** Whether the baseline grid should be shown */
+  showBaselineGrid: boolean;
 }
 
 /** The context provider props for the config provider */
 export interface ProviderProps {
   /** The children to render, which will have access to the config context */
   children: ReactNode;
-
+  /** The output formats that the provider should support */
   outputFormats?: ExampleOutputFormat[];
 }
 

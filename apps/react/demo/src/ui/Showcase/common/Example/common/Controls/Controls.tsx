@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { ReactElement } from "react";
 import type { ControlsProps } from "./types.js";
 import "./styles.css";
-import { Button } from "@canonical/react-ds-core";
+import { Button, TooltipArea } from "@canonical/react-ds-core";
 import { Field } from "@canonical/react-ds-core-form";
 import { Drawer } from "ui/Drawer/index.js";
 import { useShowcaseContext } from "../../hooks/index.js";
@@ -22,22 +22,61 @@ const Controls = ({ id, className, style }: ControlsProps): ReactElement => {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   return (
-    <div
-      id={id}
-      className={[componentCssClassname, className].filter(Boolean).join(" ")}
-      style={{
-        ...style,
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-      }}
-    >
-      <div>
-        {/*TODO use icon buttons when icon is implemented*/}
-        <Button label={"Prev"} type="button" onClick={activatePrevExample} />
-        <Button label="Next" type="button" onClick={activateNextExample} />
+    <>
+      <div
+        id={id}
+        className={[componentCssClassname, className].filter(Boolean).join(" ")}
+        style={style}
+      >
+        <div className="start">
+          {/*TODO use icon buttons when icon is implemented*/}
+          <Button
+            label="<"
+            type="button"
+            onClick={activatePrevExample}
+            aria-label="Previous example"
+          />
+          <Button
+            label=">"
+            type="button"
+            onClick={activateNextExample}
+            aria-label="Next example"
+          />
+          <span id="active-example-name" style={{ color: "white" }}>
+            {activeExample.name}&nbsp;
+            {/*Zindex is usd to draw the tooltip over the baseline overlay and the controls element. */}
+            <TooltipArea
+              Message={<span>{activeExample.description}</span>}
+              messageElementClassName="example-description"
+              maxWidth={"275px"}
+              zIndex={202}
+            >
+              {/*TODO replace this with an information icon when icon is implemented*/}
+              <i>(i)</i>
+            </TooltipArea>
+          </span>
+        </div>
+        <div className="end">
+          <Field
+            id="baseline-toggler"
+            inputType="checkbox"
+            name="showBaselineGrid"
+            label="Baseline grid"
+            isOptional={true}
+          />
+          <Button
+            label="Settings"
+            type="button"
+            onClick={() => setSettingsOpen(true)}
+          />
+          <Button
+            type="button"
+            label="Copy CSS"
+            disabled={!demoOutput?.css}
+            onClick={() => copyOutput("css")}
+          />
+        </div>
       </div>
-
       <Drawer
         title={`${activeExample.name} settings`}
         isOpenOverride={settingsOpen}
@@ -75,20 +114,7 @@ const Controls = ({ id, className, style }: ControlsProps): ReactElement => {
           </div>
         ))}
       </Drawer>
-      <div className="end">
-        <Button
-          label="Settings"
-          type="button"
-          onClick={() => setSettingsOpen(true)}
-        />
-        <Button
-          type="button"
-          label="Copy CSS"
-          disabled={!demoOutput?.css}
-          onClick={() => copyOutput("css")}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 

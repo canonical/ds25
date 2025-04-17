@@ -1,1 +1,10 @@
 @import url("@canonical/styles");
+
+/* Establish a 100% height context - needed for the controls and renderer to properly fill the page */
+html,
+body,
+.h-100,
+#storybook-root,
+#root {
+  height: 100%;
+}

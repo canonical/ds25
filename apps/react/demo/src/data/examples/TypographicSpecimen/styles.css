@@ -78,7 +78,6 @@ hr {
   margin-top: var(--hr-margin-top);
 
   &.highlighted {
-    --hr-margin-bottom: 0;
     --hr-height: 3px;
   }
 }
@@ -90,19 +89,24 @@ hr {
   }
 }
 
-.typographic-specimen-container {
+.specimen-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.specimen-grid {
   --specimen-num-cols: 1;
   --specimen-gap: 0;
-  --specimen-padding: 1.25rem;
+  --specimen-padding-horizontal: 1.25rem;
 
   display: grid;
   grid-template-columns: repeat(var(--specimen-num-cols), 1fr);
   gap: var(--specimen-gap);
-  padding: var(--specimen-padding);
+  padding: 0 var(--specimen-padding-horizontal);
   max-width: 1400px;
-  margin: 1.25rem auto;
   background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .top-section-wrapper {
@@ -195,10 +199,10 @@ hr {
 }
 
 @media (min-width: 900px) {
-  .typographic-specimen-container {
+  .specimen-grid {
     --specimen-num-cols: 8;
     --specimen-gap: 0 1.25rem;
-    --specimen-padding: 1.875rem;
+    --specimen-padding-horizontal: 1.875rem;
   }
 
   .top-section-wrapper {

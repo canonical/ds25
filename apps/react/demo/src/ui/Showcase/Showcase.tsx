@@ -1,10 +1,13 @@
 import { Example } from "./common/index.js";
+import "./styles.css";
 
 const Showcase = () => {
   return (
     <Example>
-      <Example.Renderer />
-      <Example.Controls />
+      <div className="example">
+        <Example.Renderer className="renderer" />
+        <Example.Controls className="controls" />
+      </div>
     </Example>
   );
 };

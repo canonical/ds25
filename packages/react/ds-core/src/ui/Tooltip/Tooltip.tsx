@@ -12,10 +12,13 @@ const componentCssClassName = "ds tooltip";
  * - The [withTooltip](?path=/docs/tooltip-withtooltip--docs) HOC
  */
 const Tooltip = ({
-  id,
+  positionElementId,
+  positionElementClassName,
+  positionElementStyle,
+  messageElementId,
+  messageElementClassName,
+  messageElementStyle,
   children,
-  className,
-  style,
   ref,
   isOpen = false,
   zIndex,
@@ -24,20 +27,31 @@ const Tooltip = ({
 }: TooltipProps): React.ReactElement => {
   return (
     <div
-      className={[componentCssClassName, className].filter(Boolean).join(" ")}
+      id={positionElementId}
+      className={[componentCssClassName, positionElementClassName]
+        .filter(Boolean)
+        .join(" ")}
       ref={ref}
-      id={id}
       aria-hidden={!isOpen}
       onPointerEnter={onPointerEnter}
       onFocus={onFocus}
       role="tooltip"
       style={{
-        ...style,
+        ...positionElementStyle,
+        // This isn't strictly needed as it's already set by CSS based on `aria-hidden`, but it makes testing visibility easier.
         visibility: isOpen ? "visible" : "hidden",
         zIndex,
       }}
     >
-      {children}
+      <div
+        id={messageElementId}
+        className={[messageElementClassName, "message"]
+          .filter(Boolean)
+          .join(" ")}
+        style={messageElementStyle}
+      >
+        {children}
+      </div>
     </div>
   );
 };

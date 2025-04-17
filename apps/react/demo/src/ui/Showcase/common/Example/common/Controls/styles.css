@@ -2,23 +2,76 @@
   background-color: black;
   width: 100%;
   padding: var(--spacing-horizontal-small) var(--spacing-vertical-small);
-  position: fixed;
-  left: 0;
-  bottom: 0;
+  box-sizing: border-box;
 
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-auto-rows: auto;
+
+  & .start,
   & .end {
-    margin-left: auto;
+    grid-column: 1 / -1;
+    min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
   }
 
-  & .inputs-drawer-contents .setting-category .inputs {
-    display: grid;
-    --wrapper-columns: span 1;
-    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
-    grid-column-gap: var(--spacing-horizontal-large);
+  /*
+      TODO the navigation area has an inverse theme (black background) and the baseline toggler has no background
+        so we need to override the color to make it stand out, otherwise it uses dark text on a dark background.
+     */
+
+  & #active-example-name,
+  & #baseline-toggler {
+    color: white;
   }
 
+  & #baseline-toggler {
+    margin-right: var(--spacing-horizontal-large);
+
+    /* tmp until adrian is back - currently the label is smashed up against the input when they are laid out side by side */
+
+    & .payload {
+      margin-left: var(--spacing-horizontal-small);
+    }
+  }
+}
+
+.inputs-drawer-contents {
   & .setting-category {
     padding: var(--spacing-vertical-medium) 0;
     border-top: 1px solid var(--color-text-default);
+
+    & .inputs {
+      display: grid;
+      --wrapper-columns: span 1;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-column-gap: var(--spacing-horizontal-medium);
+    }
+  }
+}
+
+@media screen and (min-width: 870px) {
+  .ds.example-controls {
+    column-gap: var(--spacing-horizontal-small);
+
+    & .start,
+    & .end {
+      justify-content: center;
+      align-items: center;
+    }
+
+    & .start {
+      grid-column: 1 / 2;
+    }
+
+    & .end {
+      grid-column: 3 / 4;
+    }
+
+    & #baseline-toggler {
+      --form-label-columns: 1 / 2;
+      --form-payload-columns: 2 / 3;
+    }
   }
 }
