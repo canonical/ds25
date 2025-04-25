@@ -17,7 +17,9 @@ const TypographicSpecimen: ShowcaseComponent = () => {
         <hr className="highlighted" />
         <div className="top-section-wrapper">
           <div className="column">
-            <h1>This is an h1 heading</h1>
+            <section className="section deep">
+              <h1>This is an h1 heading</h1>
+            </section>
             <hr />
             <h2>THIS IS AN H2 HEADING</h2>
             <hr />
@@ -75,7 +77,7 @@ const TypographicSpecimen: ShowcaseComponent = () => {
 
         <hr className="highlighted mid-section-hr" />
 
-        <div className="mid-section">
+        <section className="mid-section section shallow">
           <h2 className="grid-title">Grid</h2>
 
           <div className="lorem-ipsum-block">
@@ -93,7 +95,7 @@ const TypographicSpecimen: ShowcaseComponent = () => {
             alt="Abstract pattern lines"
             className="mid-section-image"
           />
-        </div>
+        </section>
 
         <div className="bottom-grid-container">
           <div className="grid-item">

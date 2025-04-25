@@ -1,6 +1,8 @@
 /* Allows examples to use our font faces from within the shadow DOM */
 @import "@canonical/styles-primitives-canonical/src/font-faces.css";
-@import "@canonical/styles-debug/baseline-grid";
+
+/* Reset */
+@import "normalize.css";
 
 .ds.shadow-container {
   all: initial;

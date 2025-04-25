@@ -51,12 +51,15 @@
   /* spacing tokens */
   --spacing-horizontal-xsmall: 0.25rem;
   --spacing-horizontal-small: 0.5rem;
-  --spacing-horizontal-medium: 1.25rem;
-  --spacing-horizontal-large: 1.5rem;
+  --spacing-horizontal-medium: 0.75rem;
+  --spacing-horizontal-large: 1rem;
+  --spacing-horizontal-xlarge: 1.5rem;
 
   --spacing-vertical-xsmall: 0.25rem;
   --spacing-vertical-small: 0.5rem;
   --spacing-vertical-medium: 0.75rem;
+  --spacing-vertical-large: 1rem;
+  --spacing-vertical-xlarge: 1.5rem;
 
   --spacing-input-margin-bottom: 0.5rem; /* TODO: needs baseline alignment https://github.com/canonical/vanilla-framework/blob/main/scss/_settings_spacing.scss#L122 */
   --spacing-input-padding-vertical: 0.5rem; /* TODO: needs to take baseline into account https://github.com/canonical/vanilla-framework/blob/main/scss/_settings_spacing.scss#L124 */

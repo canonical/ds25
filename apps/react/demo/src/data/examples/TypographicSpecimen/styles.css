@@ -2,6 +2,18 @@
   --hr-color: black;
 }
 
+.section {
+  padding-bottom: var(--section-padding-bottom);
+
+  &.shallow {
+    padding-bottom: var(--section-padding-bottom-shallow);
+  }
+
+  &.deep {
+    padding-bottom: var(--section-padding-bottom-deep);
+  }
+}
+
 h2,
 h4,
 h5 {
@@ -14,58 +26,115 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p {
   margin-top: 0;
 }
 
 h1 {
   font-size: var(--h1-font-size);
-  padding-top: var(--h1-padding-top);
-  margin-bottom: var(--h1-margin-bottom);
+  padding-top: var(--h1-nudge);
   line-height: var(--h1-line-height);
+  margin-bottom: calc(var(--h1-space-after) - var(--h1-nudge));
+
+  & + & {
+    margin-top: calc(-1 * var(--h1-space-after));
+  }
+
+  p + & {
+    padding-top: calc(var(--h1-nudge) + var(--spacing-vertical-xlarge));
+  }
 }
 
 h2 {
   font-size: var(--h2-font-size);
-  padding-top: var(--h2-padding-top);
-  margin-bottom: var(--h2-margin-bottom);
+  padding-top: var(--h2-nudge);
   line-height: var(--h2-line-height);
+
+  margin-bottom: calc(var(--h2-space-after) - var(--h2-nudge));
+
+  h1 + &,
+  & + & {
+    margin-top: calc(-1 * var(--h2-space-after));
+  }
+
+  p + & {
+    padding-top: calc(var(--h2-nudge) + var(--spacing-vertical-xlarge));
+  }
 }
 
 h3 {
   font-size: var(--h3-font-size);
-  padding-top: var(--h3-padding-top);
-  margin-bottom: var(--h3-margin-bottom);
+  padding-top: var(--h3-nudge);
   line-height: var(--h3-line-height);
+
+  margin-bottom: calc(var(--h3-space-after) - var(--h3-nudge));
+
+  & + & {
+    margin-top: calc(-1 * var(--h3-space-after));
+  }
+
+  p + & {
+    padding-top: calc(var(--h3-nudge) + var(--spacing-vertical-xlarge));
+  }
 }
 
 h4 {
   font-size: var(--h4-font-size);
-  padding-top: var(--h4-padding-top);
-  margin-bottom: var(--h4-margin-bottom);
+  padding-top: var(--h4-nudge);
   line-height: var(--h4-line-height);
+
+  margin-bottom: calc(var(--h4-space-after) - var(--h4-nudge));
+
+  h3 + &,
+  & + & {
+    margin-top: calc(-1 * var(--h4-space-after));
+  }
+
+  p + & {
+    padding-top: calc(var(--h4-nudge) + var(--spacing-vertical-xlarge));
+  }
 }
 
 h5 {
   font-size: var(--h5-font-size);
-  padding-top: var(--h5-padding-top);
-  margin-bottom: var(--h5-margin-bottom);
+  padding-top: var(--h5-nudge);
   line-height: var(--h5-line-height);
+
+  margin-bottom: calc(var(--h5-space-after) - var(--h5-nudge));
+
+  & + & {
+    margin-top: calc(-1 * var(--h5-space-after));
+  }
+
+  p + & {
+    padding-top: calc(var(--h5-nudge) + var(--spacing-vertical-xlarge));
+  }
 }
 
 h6 {
   font-size: var(--h6-font-size);
-  padding-top: var(--h6-padding-top);
-  margin-bottom: var(--h6-margin-bottom);
+  padding-top: var(--h6-nudge);
   line-height: var(--h6-line-height);
+
+  margin-bottom: calc(var(--h6-space-after) - var(--h6-nudge));
+
+  h5 + &,
+  & + & {
+    margin-top: calc(-1 * var(--h6-space-after));
+  }
+
+  p + & {
+    padding-top: calc(var(--h6-nudge) + var(--spacing-vertical-xlarge));
+  }
 }
 
 p {
   font-size: var(--p-font-size);
-  padding-top: var(--p-padding-top);
-  margin-top: var(--p-margin-top);
-  margin-bottom: var(--p-margin-bottom);
+  padding-top: var(--p-nudge);
   line-height: var(--p-line-height);
+
+  margin-bottom: calc(var(--p-space-after) - var(--p-nudge));
 }
 
 hr {
@@ -78,7 +147,9 @@ hr {
   margin-top: var(--hr-margin-top);
 
   &.highlighted {
-    --hr-height: 3px;
+    height: calc(var(--hr-highlighted-scale) * var(--hr-height));
+    margin-bottom: calc(var(--hr-highlighted-scale) * var(--hr-margin-bottom));
+    margin-top: calc(var(--hr-highlighted-scale) * var(--hr-margin-top));
   }
 }
 
@@ -139,8 +210,6 @@ hr {
   --mid-section-row: auto;
   --mid-section-num-cols: 1;
   --mid-section-gap: 1em 0;
-  --mid-section-margin-top: 1em;
-  --mid-section-margin-bottom: 1em;
 
   grid-column: 1 / -1;
   grid-row: var(--mid-section-row);
@@ -148,8 +217,6 @@ hr {
   grid-template-columns: repeat(var(--mid-section-num-cols), 1fr);
   gap: var(--mid-section-gap);
   align-items: start;
-  margin-top: var(--mid-section-margin-top);
-  margin-bottom: var(--mid-section-margin-bottom);
 }
 
 .mid-section .grid-title {
@@ -175,14 +242,12 @@ hr {
   --bottom-grid-row: auto;
   --bottom-grid-num-cols: 1;
   --bottom-grid-gap: 1.25rem;
-  --bottom-grid-margin-top: 1em;
 
   grid-column: 1 / -1;
   grid-row: var(--bottom-grid-row);
   display: grid;
   grid-template-columns: repeat(var(--bottom-grid-num-cols), 1fr);
   gap: var(--bottom-grid-gap);
-  margin-top: var(--bottom-grid-margin-top);
 }
 
 .bottom-grid-container .grid-item {
@@ -220,8 +285,6 @@ hr {
     --mid-section-row: 4;
     --mid-section-num-cols: 8;
     --mid-section-gap: 0 1.25rem;
-    --mid-section-margin-top: 2em;
-    --mid-section-margin-bottom: 2em;
   }
 
   .mid-section .grid-title {
